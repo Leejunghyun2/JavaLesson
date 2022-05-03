@@ -1,0 +1,17 @@
+package chap06;
+
+public class Cartest {
+
+	public static void main(String[] args) {
+		Car car = null;
+		FireEngine fe = new FireEngine();
+		FireEngine fe2 = null;
+		
+		car = fe;
+		fe.water();
+		car.door = 2;
+		System.out.println(fe.door);
+		
+	}
+	
+}

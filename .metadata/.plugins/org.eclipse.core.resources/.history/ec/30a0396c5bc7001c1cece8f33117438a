@@ -1,0 +1,11 @@
+package chap2;
+
+public class Child extends Parent {
+
+	void method() {
+		System.out.println("x=" + i);
+		System.out.println("this.x=" + this.i);
+		System.out.println("super.x=" + super.i);
+	}
+	
+}

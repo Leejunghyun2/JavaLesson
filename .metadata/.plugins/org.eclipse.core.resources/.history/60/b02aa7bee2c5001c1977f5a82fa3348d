@@ -1,0 +1,73 @@
+package step3;
+
+public class PhoneBookManager {
+	final int MAX_CNT = 100;
+	Person[] infoStorage = new Person[MAX_CNT];
+	int curCnt = 0;
+
+	void inputData() {
+
+		System.out.print("이름 : ");
+		String name = MenuViewer.sc.nextLine();
+		System.out.print("전번 : ");
+		String phoneNumber = MenuViewer.sc.nextLine();
+		System.out.print("생일 : ");
+		String birth = MenuViewer.sc.nextLine();
+		infoStorage[curCnt++] = new Person(name, phoneNumber, birth);
+		System.out.println("입력완료");
+	}
+
+	void allDisplay() {
+		for (int i = 0; i < curCnt; i++) {
+			infoStorage[i].showPhoneInfo();
+		}
+	}
+
+	void searchData() {
+		System.out.print("검색할 이름은 ? ==> ");
+		String name = MenuViewer.sc.nextLine();
+		Person tmp = null;
+		for (int i = 0; i < curCnt; i++) {
+			if (name.equals(infoStorage[i].name)) {
+
+				tmp = infoStorage[i];
+				break;
+			}
+		}
+		if (tmp != null) {
+			tmp.showPhoneInfo();
+		} else {
+			System.out.println("정보 x ");
+		}
+	}
+
+	void updateData() {
+		System.out.print("수정할 이름은 ? ==> ");
+		String name = MenuViewer.sc.nextLine();
+		int j = -1;
+		for (int i = 0; i < curCnt; i++) {
+			if (name.equals(infoStorage[i].name)) {
+				j = i;
+
+				break;
+			}
+		}
+		if(j<=0) {
+		System.out.print("수정할 전번 ? ==> ");
+		String phoneNumber = MenuViewer.sc.nextLine();
+		System.out.print("수정할 생일 ? ==> ");
+		String birth = MenuViewer.sc.nextLine();
+		infoStorage[j].phoneNumber = phoneNumber;
+		infoStorage[j].birth = birth;
+		System.out.print("------------수정완료------------\n 수정 후 : ");
+		infoStorage[j].showPhoneInfo();
+		} else {
+			System.out.println("정보 x");
+		}
+		
+	}
+
+	void deleteData() {
+	}
+
+}

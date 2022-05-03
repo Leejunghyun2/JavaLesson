@@ -1,0 +1,7 @@
+package chap06;
+
+public class Outer {
+	class Inner{
+		
+	}
+}

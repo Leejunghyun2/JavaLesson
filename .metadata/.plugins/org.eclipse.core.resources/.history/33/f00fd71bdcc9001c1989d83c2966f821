@@ -1,0 +1,7 @@
+package chap06;
+
+public class Anonymous {
+	Outer o = new Outer();
+	new Object(){}
+	
+}

@@ -1,0 +1,47 @@
+package step2;
+
+import java.util.Scanner;
+
+public class PhoneBookVer02_1 {
+	static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		int choice = 0;
+
+		while (true) {
+
+			showMenu();
+			choice = Integer.parseInt(sc.nextLine());
+
+			switch (choice) {
+			case 1:
+				inputData();
+				break;
+			case 2:
+				System.out.println("프로그램 종료");
+				return;
+			}
+
+		}
+
+	}
+
+	static void showMenu() {
+		System.out.println("메뉴선택하세요");
+		System.out.println("1. 데이터 입력");
+		System.out.println("2. 프로그램 종료");
+		System.out.print("선택 : ");
+	}
+
+	static void inputData() {
+
+		System.out.print("이름 : ");
+		String name = sc.nextLine();
+		System.out.print("전번 : ");
+		String phoneNumber = sc.nextLine();
+		System.out.print("생일 : ");
+		String birth = sc.nextLine();
+		Person p = new Person(name, phoneNumber, birth);
+		p.showPhoneInfo();
+	}
+}

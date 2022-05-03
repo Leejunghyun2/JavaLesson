@@ -1,0 +1,5 @@
+package step06;
+
+public class MenuChoiceException extends Exception {
+
+}

@@ -1,0 +1,18 @@
+package step3;
+
+public class PhoneBookManager {
+	Person[] infoStorage = new Person[100];
+	
+	
+	void inputData() {
+
+		System.out.print("이름 : ");
+		String name = MenuViewer.sc.nextLine();
+		System.out.print("전번 : ");
+		String phoneNumber = MenuViewer.sc.nextLine();
+		System.out.print("생일 : ");
+		String birth = MenuViewer.sc.nextLine();
+		Person p = new Person(name, phoneNumber, birth);
+		p.showPhoneInfo();
+	}
+}

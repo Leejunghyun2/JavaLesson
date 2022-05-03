@@ -1,0 +1,15 @@
+package chap04;
+
+public class Singleton {
+	 Singleton s;
+	public Singleton(){}
+	
+	
+	public Singleton getInstance() {
+		if(s==null) s= new Singleton();
+		return s;
+	}
+	
+	
+	
+}

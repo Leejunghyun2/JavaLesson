@@ -1,0 +1,13 @@
+package chap08;
+
+public class DeckTest {
+
+	public static void main(String[] args) {
+	
+		Deck dec = new Deck();
+		Card c = new Card();
+	
+		c = dec.pick(((int)(Math.random()*dec.CARD_NUM)));
+		System.out.println(c);
+	}
+}

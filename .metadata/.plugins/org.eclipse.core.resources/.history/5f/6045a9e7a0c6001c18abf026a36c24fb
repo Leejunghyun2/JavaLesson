@@ -1,0 +1,11 @@
+package chap08;
+
+public class Deck {
+
+	final int CARD_NUM = 52;
+	
+	
+	
+	
+	
+}

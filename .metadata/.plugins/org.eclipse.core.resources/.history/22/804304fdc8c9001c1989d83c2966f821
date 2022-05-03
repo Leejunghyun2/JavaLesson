@@ -1,0 +1,13 @@
+package chap05;
+
+public class Dropship extends AirUnit implements Repairable {
+
+	Dropship(int hp){
+		super(125);
+		hitPoint = MAX_HP;
+	}
+	
+	public String toString() {
+		return "Dropship";
+	}
+}

@@ -1,0 +1,12 @@
+package chap06;
+
+public class captionTvTest {
+
+	public static void main(String[] args) {
+		CaptionTv ctv = new CaptionTv();
+				
+		
+		
+	}
+	
+}

@@ -1,0 +1,17 @@
+package chap2;
+
+public class Point3D extends Point {
+
+	int z;
+
+	
+	String getLocation() {
+		return super.getLocation()+", z=" + z;
+	
+	
+	}
+}
+	
+	
+	
+

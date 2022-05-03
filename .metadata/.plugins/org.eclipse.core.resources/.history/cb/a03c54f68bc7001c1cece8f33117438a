@@ -1,0 +1,12 @@
+package chap07;
+
+public class Child extends Parent {
+	int x = 100;
+
+	@Override
+	void method() {
+		// TODO Auto-generated method stub
+		super.method();
+	}
+	
+}

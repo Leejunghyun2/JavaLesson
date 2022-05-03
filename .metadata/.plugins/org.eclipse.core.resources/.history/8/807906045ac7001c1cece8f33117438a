@@ -1,0 +1,43 @@
+package NewPersonExam01;
+
+public class MenuChoice {
+	
+	Menu choice = new Menu();
+	String kinds; 
+	void galaxy() {
+		choice.price = 1000000;
+		kinds = kind(1);
+		System.out.print("색상 선택하세요 : 1. red 2. green 3. blue 4. pink \n");
+		int color = Integer.parseInt(MenuTest.sc.nextLine());
+		System.out.print("용량을 선택하세요 1. 64GB 2. 128GB(+10만) 3. 256GB(20만) 4. 512GB(30만)\n");
+		int cap = Integer.parseInt(MenuTest.sc.nextLine());
+		choice.color = color;
+		choice.gb = cap;
+		
+	}
+	
+	void iPhone() {
+		choice.price = 1300000;
+		kinds = kind(2);
+		System.out.print("색상 선택하세요 : 1. Gold 2. Green 3. Silver 4. White\n");
+		int color = Integer.parseInt(MenuTest.sc.nextLine());
+		System.out.print("용량을 선택하세요 1. 64GB 2. 128GB(+10만) 3. 256GB(20만) 4. 512GB(30만)\n");
+		int cap = Integer.parseInt(MenuTest.sc.nextLine());
+		for(int i = cap; i>1;i--) {
+			choice.price += 100000;
+		}
+		choice = new Menu(kinds,color,cap,choice.price);
+	}
+		
+	
+	String kind(int i) {
+		if(i==1) {
+			return "Galaxy";
+		}else if(i==2) {
+			return "iPhone";
+		}else {
+			return "x";
+		}
+	}
+	
+}

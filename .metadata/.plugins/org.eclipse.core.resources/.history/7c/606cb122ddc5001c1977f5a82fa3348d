@@ -1,0 +1,38 @@
+package step3;
+
+public class PhoneBookManager {
+	final int MAX_CNT=100;
+	Person[] infoStorage = new Person[MAX_CNT];
+	int curCnt = 0;
+	
+	void inputData() {
+
+		System.out.print("이름 : ");
+		String name = MenuViewer.sc.nextLine();
+		System.out.print("전번 : ");
+		String phoneNumber = MenuViewer.sc.nextLine();
+		System.out.print("생일 : ");
+		String birth = MenuViewer.sc.nextLine();
+		infoStorage[curCnt++] =  new Person(name, phoneNumber, birth);
+		System.out.println("입력완료");
+	}
+	
+	void allDisplay() {
+		for(int i=0; i<curCnt;i++) {
+			infoStorage[i].showPhoneInfo();
+		}
+	}
+	void searchData() {
+		System.out.print("검색할 이름은 ? ==> ");
+		String name = MenuViewer.sc.nextLine();
+		for(int i=0; i<curCnt;i++) {
+			if(name.equals(infoStorage[i].name)) {
+				infoStorage[i].showPhoneInfo();
+				break;
+			}
+		}
+	}
+	void updateData() {}
+	void deleteData() {}
+	
+}

@@ -1,0 +1,10 @@
+package chap08;
+
+public class DeckTest {
+
+	Deck dec = new Deck();
+	Card c = new Card();
+	
+	
+	
+}

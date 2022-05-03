@@ -1,0 +1,14 @@
+package chap04;
+
+public class FighterTest {
+	public static void main(String[] args) {
+		Fighter f = new Fighter();
+		
+		if(f instanceof Unit) {}
+		if(f instanceof Fightable) {}
+		if(f instanceof Movable) {}
+		if(f instanceof Attackable) {}
+		if(f instanceof Object) {}
+		
+	}
+}
