@@ -1,0 +1,14 @@
+package PersonTest;
+
+public class CompanyFriends extends Person {
+	 
+		String comName;
+	
+	
+	CompanyFriends(String name,String PhoneNumber,String birth,String comName){
+		super(name,PhoneNumber,birth);
+		this.comName = comName;
+		
+		
+	}
+}

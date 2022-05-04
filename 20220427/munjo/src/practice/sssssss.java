@@ -1,0 +1,22 @@
+package practice;
+
+import java.util.Scanner;
+
+public class sssssss {
+
+	
+	 public static void main(String[] args) {
+		 		Scanner sc = new Scanner(System.in);
+		 		
+		        System.out.println("ddd");
+				String a = sc.nextLine();
+				if(a=="")
+				{
+					System.out.println("mmmmmmm");
+				} else {
+					
+				System.out.println("uuuuuu");
+					
+				}
+	}
+}

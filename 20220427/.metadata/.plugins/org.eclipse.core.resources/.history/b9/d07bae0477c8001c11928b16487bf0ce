@@ -1,0 +1,12 @@
+package Test;
+
+public class PhoneBookVer04 {
+	public static void main(String[] args) {
+		PhoneBookManager pm = PhoneBookManager.getInstance();
+		int choice = 0;
+
+		pm.infoStorage[0] = new Person("ggg","Ggg","Ggg");
+		System.out.println(pm.infoStorage[0] instanceof UnivFriends);
+		
+	}
+}

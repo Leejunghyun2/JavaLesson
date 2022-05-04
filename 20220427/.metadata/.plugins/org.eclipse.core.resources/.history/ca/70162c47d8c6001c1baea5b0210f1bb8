@@ -1,0 +1,20 @@
+package chap1;
+
+public class Menuchoice {
+	int j=0,k=0;
+	System.out.print("종류를 선택하세요 : 1.갤럭시 2.아이폰");
+	int i = Integer.parseInt(sc.nextLine());
+	if(i==1) {
+		
+	
+	System.out.print("색상 선택하세요 : 1. red 2. green 3. blue 4. pink\n");
+	j = Integer.parseInt(sc.nextLine());
+	} else if(i==2) {
+		
+	
+	System.out.print("색상 선택하세요 : 1. gold 2. green 3. silver 4. white\n");
+	j = Integer.parseInt(sc.nextLine());
+	} 
+	System.out.print("용량을 선택하세요 1. 64GB 2. 128GB(+10만) 3. 256GB(20만) 4. 512GB(30만)\n");
+	k = Integer.parseInt(sc.nextLine());
+}

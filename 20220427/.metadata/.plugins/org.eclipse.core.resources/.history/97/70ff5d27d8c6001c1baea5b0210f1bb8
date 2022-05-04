@@ -1,0 +1,9 @@
+package chap1;
+
+public class NameClass {
+  public static void main(String[] args) {
+	
+	  System.out.println("Hello World");
+}
+
+}

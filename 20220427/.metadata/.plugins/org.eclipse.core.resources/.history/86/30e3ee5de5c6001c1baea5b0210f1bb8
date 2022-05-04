@@ -1,0 +1,32 @@
+package practice;
+
+public class Cat {
+	String name;
+	int age;
+	String gender;
+	String color;
+	
+	Cat(){
+		this("나비", 0, "여","삼색"); //기본형 메소드에 초기값 넣어준 거
+	}
+	
+	Cat(String name, int age, String gender, String color){
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+		this.color = color;
+	}
+	
+	Cat(String name, int age, String gender){
+		this(name, age, gender, null);
+	}
+	
+	void showInfo() {
+		if(color==null || color.length()==0) //color==" "은 왜 안되는거지? 
+			System.out.printf("고양이 이름 : %s %n고양이 나이 : %d %n고양이 성별 : %s%n" ,name, age, gender);
+		else	
+		System.out.printf("고양이 이름 : %s %n고양이 나이 : %d %n고양이 성별 : %s %n고양이 색(무늬) : %s %n",name, age, gender, color);
+	}
+	
+
+}

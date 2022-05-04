@@ -1,0 +1,92 @@
+package practice; //step2에서는(메인클래스 안에 같이 쓸 때는)static 다 적어줬는데 여긴 왜 다 뺀거지?
+
+public class CatListDataTool {
+	// 그냥 여기다가도 스캐너 적으면 안되나? ㅇㅇ된대. 여다 적어두고 메뉴에서 여기껄 끌어다 쓸 수 있대
+	// 메뉴클래스에 안적고 여기 적어서 여기걸 메뉴클래스에 갖다써도 똑같은 건가? ㅇㅇ 그렇대
+	// 근데 여러 클래스에서 쓰려면 스캐너에 스태틱필수.
+	int here = 0;
+	Cat[] storage = new Cat[1000];
+
+	void inputData() {
+		// 자바 배열은 딱 정해진 크기를 무조건 설정해야함!!!
+		// 값저장한 배열 만듦. 배열이 저장될 위치 here.
+
+		System.out.print("이름을 입력하세요 : ");
+		String name = Menu.sc.nextLine();
+		System.out.print("나이를 입력하세요 : ");
+		int age = Integer.parseInt(Menu.sc.nextLine());
+		System.out.print("성별을 입력하세요 : ");
+		String gender = Menu.sc.nextLine();
+		System.out.print("색(무늬)를 입력하세요 : ");
+		String color = Menu.sc.nextLine();
+//ctrl shift f 전체 정렬
+//art 화살표 방금전 화면으로 가기 ㅇㅇ 		
+		storage[here] = new Cat(name, age, gender, color);
+		here++; // 다음 배열 자리로 옮기기. 그래야 다른 데이터 또 입력할 수 있지,,
+	}
+
+	void updateData() {
+		System.out.println("수정할 이름은? ");
+		String name = Menu.sc.nextLine();
+
+		int index = -1;
+		index = search(name);
+
+		if (index > -1) {
+			System.out.println("나이 재입력 : ");
+			storage[index].age = Integer.parseInt(Menu.sc.nextLine());
+			System.out.println("성별 재입력 : ");
+			storage[index].gender = Menu.sc.nextLine();
+			System.out.println("색깔(무늬) 재입력 : ");
+			storage[index].color = Menu.sc.nextLine();
+
+			System.out.println("수정 완료");
+		} else
+			System.out.println("해당 데이터 없음");
+	}
+
+	void searchData() {
+		System.out.println("찾을 이름은? ");
+		String name = Menu.sc.nextLine();
+
+		int index = search(name);
+
+		if (index > -1) {
+			storage[index].showInfo();
+		} else { // 검색 실패시 메세지
+			System.out.println("해당하는 정보가 존재하지 않음");
+		}
+	}
+
+	int search(String name) {
+
+		for (int i = 0; i < here; i++) {
+			if (name.equals(storage[i].name)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	void deleteData() {
+
+		System.out.println("삭제할 이름은? ");
+		String name = Menu.sc.nextLine();
+		int index = search(name);
+		
+		if(index>-1) {
+			for(int i=index; i<here; i++) {
+				storage[i]=storage[i+1];
+			}
+		}
+		else System.out.println("해당 데이터 없음");
+	}
+
+	void displayAll() {
+		for(int i=0; i<here; i++) {
+			storage[i].showInfo();
+		}
+
+	}
+
+}
