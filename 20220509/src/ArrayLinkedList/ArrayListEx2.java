@@ -1,4 +1,4 @@
-package chap02;
+package ArrayLinkedList;
 
 import java.util.List;
 import java.util.ArrayList;

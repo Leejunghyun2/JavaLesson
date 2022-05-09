@@ -1,4 +1,4 @@
-package chap02;
+package ArrayLinkedList;
 
 import java.util.Vector;
 
@@ -27,6 +27,10 @@ public class VectorEx1 {
 		v.add("1");
 		print(v);
 		v.ensureCapacity(23);
+		print(v);
+		v.clear();
+		print(v);
+		v.trimToSize();
 		print(v);
 	}
 	
