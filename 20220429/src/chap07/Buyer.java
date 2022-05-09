@@ -16,16 +16,16 @@ public class Buyer {
 		x[count++] = t;
 	}
 	void summary() {
-		String sum = " ";
+		String[] sum = new String[count];
 
 		for(int i=0; i<count;i++) {
 			if(x[i]==null) {
 				System.out.println("구매한 물품이 없습니다.");
 				return;
 			} 
-			sum += x[i]+", ";
+			sum[i] = ""+x[i];
 		}
-		System.out.println("물품 :"+ sum);
+		System.out.println("물품 :"+String.join(",", sum));
 	}
 	
 	
