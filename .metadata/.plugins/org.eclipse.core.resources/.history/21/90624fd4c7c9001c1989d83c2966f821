@@ -1,9 +1,0 @@
-package chap05;
-
-public class Dropship extends AirUnit implements Repairable {
-
-	Dropship(int hp){
-		super(hp);
-		hitPoint = MAX_HP;
-	}
-}
