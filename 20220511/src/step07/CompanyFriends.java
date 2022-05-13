@@ -13,9 +13,9 @@ public class CompanyFriends extends Person {
 	void showPhoneInfo() {
 		
 			if (!birth.equals(""))
-				System.out.printf("이름: %s 전번: %s 생일: %s 회사이름: %s\n", name, phoneNumber, birth, comName);
+				System.out.printf("이름: %s\t 전화번호: %s\t 생일: %s\t 회사명: %s\n", name, phoneNumber, birth, comName);
 			else
-				System.out.printf("이름: %s 전번: %s 회사이름: %s \n", name, phoneNumber, comName);
+				System.out.printf("이름: %s\t 전화번호: %s\t 회사명: %s \n", name, phoneNumber, comName);
 
 	}
 }

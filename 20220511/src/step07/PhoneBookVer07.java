@@ -10,7 +10,7 @@ public class PhoneBookVer07 {
 			
 			MenuViewer.showMenu();
 			choice = Integer.parseInt(MenuViewer.sc.nextLine());
-			if(choice<1 || choice>7 || choice ==5) {
+			if(choice<1 || choice>7) {
 				throw new MenuChoiceException(choice);
 			}
 			switch (choice) {
@@ -25,6 +25,9 @@ public class PhoneBookVer07 {
 				break;
 			case MainMenu.DELETE:
 				pm.deleteData();
+				break;
+			case MainMenu.ALLDELETE:
+				pm.allDelete();
 				break;
 			case MainMenu.DISPLAY:
 				pm.allDisplay();

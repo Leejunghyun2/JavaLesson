@@ -18,13 +18,10 @@ public class UnivFriends extends Person {
 	//Person showPhoneInfo() overriding 
 	void showPhoneInfo() {
 			if (!birth.equals(""))
-				System.out.printf("이름: %s 전번: %s 생일: %s 전공: %s 학년: %d학년\n", name, phoneNumber, birth, major, grade);
+				System.out.printf("이름: %s\t 전화번호: %s\t 생일: %s\t 전공: %s\t 학년: %d학년\n", name, phoneNumber, birth, major, grade);
 			else
-				System.out.printf("이름: %s 전번: %s  전공: %s 학년: %d학년\n", name, phoneNumber, major, grade);
+				System.out.printf("이름: %s\t 전화번호: %s\t 전공: %s\t 학년: %d학년\n", name, phoneNumber, major, grade);
 
-	}
-	public String toString(){
-		return name + " : " + phoneNumber + " : "+birth + " : " +major + " : " +grade+" 학년";
 	}
 
 }
