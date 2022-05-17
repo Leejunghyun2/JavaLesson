@@ -6,7 +6,6 @@ public class PhoneBookVer08 {
 		PhoneBookManager pm = PhoneBookManager.getInstance();
 		int choice = 0;
 		
-		pm.FileSearch();
 		
 		while (true) {
 			try {

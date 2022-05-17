@@ -13,6 +13,7 @@ public class PhoneBookManager {
 	private static PhoneBookManager s; // 인스턴스호출 없이 사용가능
 
 	private PhoneBookManager() {// 다른 클래스에서 사용 못하게
+		FileSearch();
 	}
 
 	public static PhoneBookManager getInstance() { // 다른 생성자 겹치지않기 위한 싱글톤 작업
@@ -23,6 +24,7 @@ public class PhoneBookManager {
 
 	int count = 1;
 	Set<Person> infoStorage = new HashSet<Person>();
+	String fileName = "Person.ser";
 
 	void inputData() throws MenuChoiceException {
 		System.out.print("추가할 항목을 선택하세요\n1. 친구 2.대학친구 3.회사친구 ==> ");
@@ -196,7 +198,6 @@ public class PhoneBookManager {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			String fileName = "Person.ser";
 			fis = new FileInputStream(fileName);
 			in = new ObjectInputStream(fis);
 
@@ -224,12 +225,12 @@ public class PhoneBookManager {
 		ObjectOutputStream out = null;
 
 		try {
-			String fileName = "Person.ser";
+			
 			fos = new FileOutputStream(fileName);
 			out = new ObjectOutputStream(fos);
 
 			out.writeObject(infoStorage);
-			System.out.println("직렬화가 잘 끝났습니다.");
+			System.out.println("저장 되었습니다..");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
