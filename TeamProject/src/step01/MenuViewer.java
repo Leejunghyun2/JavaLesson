@@ -5,7 +5,8 @@ public class MenuViewer {
     System.out.println("1. 영화예매");
     System.out.println("2. 예매확인" );
     System.out.println("3. 예매취소");
-    System.out.println("4. 좌석현황");
+    System.out.println("4. 좌석조회");
+    System.out.println("5. 로그아웃");
     System.out.println("0. 취소" );
     System.out.print("==> ");
   }
@@ -22,6 +23,9 @@ public class MenuViewer {
 	  System.out.println("1. 로그인");
 	  System.out.println("2. 회원가입");
 	  System.out.println("3. 회원목록(테스트용)");
+	  System.out.println("4. 비회원예매");
+	  System.out.println("5. 예매확인");
+	  System.out.println("6. 좌석조회");
 	  System.out.println("0. 취소");
 	  System.out.print("==> ");
   }
