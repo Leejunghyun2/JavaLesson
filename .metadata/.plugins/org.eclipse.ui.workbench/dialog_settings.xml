@@ -13,6 +13,7 @@
 	<section name="ZipFileImportWizard">
 		<item key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="false"/>
 		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\WU\Desktop\team.zip"/>
 			<item value="C:\Users\WU\Desktop\PersonTest.zip"/>
 		</list>
 	</section>

@@ -1,17 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-    <typeInfo handle="=20220427_2/C:\/Program Files\/Java\/jdk-11.0.14\/lib\/jrt-fs.jar`java.base=/module=/true=/=/javadoc_location=/https:\/\/docs.oracle.com\/en\/java\/javase\/11\/docs\/api\/=/&lt;java.lang(Object.class[Object" modifiers="33" timestamp="1650242946558"/>
-    <typeInfo handle="=20220429/src&lt;chap2{Point.java[Point" modifiers="1" timestamp="1651196276729"/>
-    <typeInfo handle="=20220429/src&lt;chap06{Car.java[Car" modifiers="1" timestamp="1651212555181"/>
-    <typeInfo handle="=20220429/src&lt;chap07{Parent.java[Parent" modifiers="1" timestamp="1651216508834"/>
-    <typeInfo handle="=20220429/src&lt;chap07{Product.java[Product" modifiers="1" timestamp="1651218131476"/>
-    <typeInfo handle="=20220502/src&lt;chap04{PlayingCard.java[PlayingCard" modifiers="513" timestamp="1651458004207"/>
-    <typeInfo handle="=20220502/src&lt;chap04{Moveable.java[Moveable" modifiers="513" timestamp="1651468266824"/>
-    <typeInfo handle="=20220502/src&lt;chap04{Attackable.java[Attackable" modifiers="513" timestamp="1651458794967"/>
-    <typeInfo handle="=20220502/src&lt;chap04{Fightable.java[Fightable" modifiers="513" timestamp="1651458629309"/>
-    <typeInfo handle="=20220502/src&lt;chap05{Unit.java[Unit" modifiers="1" timestamp="1651461495860"/>
-    <typeInfo handle="=20220502/src&lt;chap05{AirUnit.java[AirUnit" modifiers="1" timestamp="1651461572475"/>
-    <typeInfo handle="=20220502/src&lt;chap05{GroundUnit.java[GroundUnit" modifiers="1" timestamp="1651461537609"/>
-    <typeInfo handle="=20220502/src&lt;chap05{Repairable.java[Repairable" modifiers="513" timestamp="1651461603388"/>
-    <typeInfo handle="=20220502/C:\/Program Files\/Java\/jdk-11.0.14\/lib\/jrt-fs.jar`java.base=/module=/true=/=/javadoc_location=/https:\/\/docs.oracle.com\/en\/java\/javase\/11\/docs\/api\/=/&lt;java.lang(Exception.class[Exception" modifiers="33" timestamp="1650242946558"/>
+    <typeInfo handle="=20220518/src&lt;chap02{Fruit.java[Fruit" modifiers="1" timestamp="1652835762266"/>
 </typeInfoHistroy>

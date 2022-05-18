@@ -1,0 +1,52 @@
+package step01;
+
+
+public class User extends Consumer {
+	private String id;
+
+	private String pwd;
+
+	public String getId() {
+		return this.id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPwd() {
+		return this.pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	User(String id, String pwd, String name, String phoneNumber) {
+		super(name, phoneNumber);
+		this.id = id;
+		this.pwd = pwd;
+	}
+
+	User() {
+	}
+
+	void showInfo() {
+		System.out.printf(" %s : %s : %s : %s \n", id, pwd, name, phoneNumber);
+	}
+
+	@Override
+	public int hashCode() {
+		return id.hashCode(); // 주소의 해쉬코드도 비교해야해서 오버라이드
+	}
+
+	@Override
+	public boolean equals(Object obj) { // 각기 다른곳에 담겨 있는 객체들이라 그 값이 같은지 확인하기위한 오버라이드
+		if (obj instanceof User) {
+			User tmp = (User) obj;
+			return id.equals(tmp.id);
+		}
+		return false;
+	}
+
+}
