@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
     <fullyQualifiedTypeName name="step3.PhoneBookManager"/>
     <fullyQualifiedTypeName name="step3.MenuViewer"/>
     <fullyQualifiedTypeName name="chap06.CaptionTv"/>
@@ -38,7 +37,6 @@
     <fullyQualifiedTypeName name="java.io.ByteArrayOutputStream"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
-    <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="chap03.DataOutputStreamEx1"/>
     <fullyQualifiedTypeName name="chap03.DataInputStreamEx1"/>
     <fullyQualifiedTypeName name="java.io.DataOutput"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="chap02.Eatable"/>
     <fullyQualifiedTypeName name="step01.NewMember"/>
     <fullyQualifiedTypeName name="step01.MovieReservation"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="step01.ChoiceException"/>
 </qualifiedTypeNameHistroy>

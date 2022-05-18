@@ -44,7 +44,7 @@ public class NewMember {
 	String login() {
 		System.out.print("ID를 입력하세요 ==> ");
 		String id = MovieReservation.sc.nextLine().trim();
-		System.out.println("비밀번호를 입력하세요 ==> ");
+		System.out.print("비밀번호를 입력하세요 ==> ");
 		String pwd = MovieReservation.sc.nextLine().trim();
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getId().equals(id)) {

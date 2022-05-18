@@ -8,5 +8,11 @@ public class BoxTest {
 		
 		Box b3 =(Box)b1.getItem();
 		System.out.println();
+		while(true) {
+			break;
+		}
+		while(true) {
+			break;
+		}
 	}
 }
