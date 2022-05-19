@@ -25,4 +25,8 @@ public class MemberReservationInfo {
 		}
 		return false;
 	}
+	
+	public String toString() {
+		return "영화관 제 " + moviechoice + "관" + seat + "번"; 
+	}
 }

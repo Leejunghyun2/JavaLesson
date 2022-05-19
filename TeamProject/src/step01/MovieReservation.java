@@ -3,6 +3,8 @@ package step01;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 public class MovieReservation {
 	public static Scanner sc = new Scanner(System.in);
 
@@ -21,17 +23,14 @@ public class MovieReservation {
 		}
 		return s;
 	}
+	ArrayList<Integer> buffer = new ArrayList<Integer>();
 
-	String name;
-	String tel;
-	int moviechoice = 0;
-	String store;
-	int att;
-	int seatnum;
+	String name, tel;
+	int moviechoice = 0 , att , seatnum;
 	ArrayList<User> users = NewMember.userInstance();
 	ArrayList<Consumer> con = new ArrayList<Consumer>();
-	private ArrayList<MemberReservationInfo> mri = new ArrayList<MemberReservationInfo>();
-	private ArrayList<NonReservInfo> nri = new ArrayList<NonReservInfo>();
+	private static ArrayList<MemberReservationInfo> mri = new ArrayList<MemberReservationInfo>();
+	private static ArrayList<NonReservInfo> nri = new ArrayList<NonReservInfo>();
 
 	void movieChoice() throws ChoiceException {
 		MenuViewer.showMovieMenu();
@@ -48,8 +47,14 @@ public class MovieReservation {
 		if (NewMember.SIGN[0] != null) {
 			for (int i = 0; i < mri.size(); i++) {
 				if (mri.get(i).id.equals(NewMember.SIGN[0])) {
-					System.out.printf("%s님이 예매하신 자리는 \n영화관 제 %s관 %s 자리입니다.\n"
-										, mri.get(i).id, mri.get(i).moviechoice,mri.get(i).seat );
+					System.out.printf("%s님의 예매내역",mri.get(i).id);
+					break;
+				}
+			}
+			for (int i = 0; i < mri.size(); i++) {
+				if (mri.get(i).id.equals(NewMember.SIGN[0])) {
+					System.out.printf("영화관 제 %s관 %s 번\n"
+										,  mri.get(i).moviechoice,mri.get(i).seat );
 				}
 			}
 		}
@@ -70,36 +75,82 @@ public class MovieReservation {
 	}
 
 	void reservationCancle() {
-		System.out.print("예매취소 하시겠습니까? 1.YES 2.NO \n==>");
-		int choice = Integer.parseInt(sc.nextLine());
-		if (choice == 1) {
-			if (NewMember.SIGN[0] != null) {
-				for (int i = 0; i < mri.size(); i++) {
-					if (mri.get(i).id.equals(NewMember.SIGN[0])) {
-						SEAT[mri.get(i).moviechoice-1][numSearch(mri.get(i).seat.charAt(0))][getNum(
-								mri.get(i).seat.charAt(1))] = mri.get(i).seat;
-						System.out.println("----취소완료----");
+		int count = 0;
+		
+			if (NewMember.SIGN[0] != null) { //if(2) 시작
+				for (int i = 0; i < mri.size(); i++) { //for(1)시작
+					if (mri.get(i).id.equals(NewMember.SIGN[0])) {//if(3)시작 
+						count += 1;
+						buffer.add(i);
+						System.out.printf("%d : %s관 %s번\n",count,mri.get(i).moviechoice,mri.get(i).seat);
 					} else {
-						System.out.print("핸드폰번호를 입력해주세요 ==> ");
-						String tel = sc.nextLine();
-						for (int j = 0; j < nri.size(); j++) {
-							if (nri.get(j).tel.equals(tel)) {
-								SEAT[nri.get(j).moviechoice-1][numSearch(nri.get(j).seat.charAt(0))][getNum(
-										nri.get(j).seat.charAt(1))] = nri.get(j).seat;
-								System.out.println("----취소완료----");
-
-							}else {
-								System.out.println("잘못입력하셨습니다.");
-								return;
-							}
-						}
+						System.out.println("예매내역이 없습니다.");
 					}
 				}
-			}
-		} else {
-			return;
-		}
-	}
+				if(count > 1) {
+					System.out.print("어떤 걸 취소하시겠습니까? ==> ");
+					int num = Integer.parseInt(sc.nextLine());
+					System.out.println("예매 취소하시겠습니까?");
+					System.out.printf("제 %s관 %s번 ==> 1. Yes 2. No\n==> ",
+										mri.get(buffer.get(num-1)).moviechoice,
+												mri.get(buffer.get(num-1)).seat);
+					int choice = Integer.parseInt(sc.nextLine());
+					if (choice == 1) {
+						SEAT[mri.get(buffer.get(num-1)).moviechoice-1]
+								[numSearch(mri.get(buffer.get(num-1)).seat.charAt(0))]
+										[getNum(mri.get(buffer.get(num-1)).seat.charAt(1))] 
+												= mri.get(buffer.get(num-1)).seat;
+					System.out.println("-----취소완료-----");
+					count = 0;
+					mri.remove((int)(buffer.get(num-1)));
+					buffer.remove(num-1);
+					} else {
+						System.out.println("------취소안함-------");
+						return;
+					}
+					
+				}else {
+					System.out.println("예매 취소하시겠습니까?");
+					System.out.printf("제 %s관 %s번 ==> 1. Yes 2. No\n==> ",
+										mri.get(buffer.get(0)).moviechoice,
+												mri.get(buffer.get(0)).seat);
+					int choice = Integer.parseInt(sc.nextLine());
+					if (choice == 1) {
+					SEAT[mri.get(buffer.get(0)).moviechoice-1]
+						[numSearch(mri.get(buffer.get(0)).seat.charAt(0))]
+								[getNum(mri.get(buffer.get(0)).seat.charAt(1))] 
+										= mri.get(buffer.get(0)).seat;
+				
+					System.out.println("----취소완료----");
+					count = 0;
+					mri.remove(0);
+					buffer.remove(0);
+					} else {
+						System.out.println("------취소안함-------");
+					}
+				}
+				} else { //if(2) 끝 else(2)
+						System.out.print("핸드폰번호를 입력해주세요 ==> ");
+						String tel = sc.nextLine();
+						for (int j = 0; j < nri.size(); j++) {//for(2)시작
+							if (nri.get(j).tel.equals(tel)) { //if(4)시작
+								SEAT[nri.get(j).moviechoice-1]
+										[numSearch(nri.get(j).seat.charAt(0))]
+												[getNum(nri.get(j).seat.charAt(1))] 
+														= nri.get(j).seat;
+								
+								System.out.println("----취소완료----");
+
+							}else { //if(4)끝 else(4)시작
+								System.out.println("잘못입력하셨습니다.");
+								return;
+							}//else(4) 끝
+						}//for(2) 끝
+					} // else(3) 끝
+				
+			
+		 
+	} 
 
 	void signOut() {
 		System.out.print("로그아웃 하시겠습니까? 1.YES 2.NO \n==>");
@@ -128,7 +179,7 @@ public class MovieReservation {
 				SEAT[moviechoice - 1][att][seatnum] = "XX";
 				System.out.println("--------예매완료--------");
 				System.out.println("영화관 제 " + moviechoice + "관\n" + "좌석 : " + at);
-				store = at;
+				
 				if (NewMember.SIGN[0] != null) {
 					mri.add(new MemberReservationInfo(NewMember.SIGN[0], moviechoice, at));
 				} else {
