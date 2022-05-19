@@ -1,6 +1,8 @@
 package step01;
 
-public class Consumer {
+import java.io.Serializable;
+
+public class Consumer implements Serializable {
   String name;
   
   String phoneNumber;

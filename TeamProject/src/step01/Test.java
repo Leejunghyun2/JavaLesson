@@ -7,7 +7,7 @@ public class Test {
 
 		while (true) {
 			try {
-				if (NewMember.SIGN[0] == null) {
+				if (NewMember.SIGN[0] == null) { //비회원
 					MenuViewer.showUserManagement();
 					int choice = Integer.parseInt(MovieReservation.sc.nextLine());
 					switch (choice) {
@@ -36,13 +36,18 @@ public class Test {
 						mm.nonreserveConfirm();
 						continue;
 					case 6:
+						mm.reservationCancle();
+						continue;
+					case 7:
 						mm.nonShowSeatStatus();
 						continue;
 					case 0:
+						mm.ObjOutputData();
+						users.ObjOutputData();
 						return;
 					}
-				}
-
+				}//비회원끝
+				//로그인 후 시작구간
 				MenuViewer.showMenu();
 				int choice = Integer.parseInt(MovieReservation.sc.nextLine());
 				switch (choice) {
@@ -63,6 +68,8 @@ public class Test {
 					mm.signOut();
 					break;
 				case 0:
+					mm.ObjOutputData();
+					users.ObjOutputData();
 					return;
 				}
 			} catch (ChoiceException e) {

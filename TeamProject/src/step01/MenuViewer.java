@@ -24,8 +24,9 @@ public class MenuViewer {
 	  System.out.println("2. 회원가입");
 	  System.out.println("3. 회원목록(테스트용)");
 	  System.out.println("4. 비회원예매");
-	  System.out.println("5. 예매확인");
-	  System.out.println("6. 좌석조회");
+	  System.out.println("5. 비회원예매확인");
+	  System.out.println("6. 비회원예매취소");
+	  System.out.println("7. 좌석조회");
 	  System.out.println("0. 취소");
 	  System.out.print("==> ");
   }

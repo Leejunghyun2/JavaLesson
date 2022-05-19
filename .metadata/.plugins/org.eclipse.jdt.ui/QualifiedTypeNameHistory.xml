@@ -49,7 +49,6 @@
     <fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
-    <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="chap01.Box"/>
     <fullyQualifiedTypeName name="chap02.FruitBox"/>
     <fullyQualifiedTypeName name="chap02.Eatable"/>
@@ -57,7 +56,8 @@
     <fullyQualifiedTypeName name="step01.MovieReservation"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="step01.ChoiceException"/>
-    <fullyQualifiedTypeName name="step01.NonReservInfo"/>
-    <fullyQualifiedTypeName name="step01.MemberReservationInfo"/>
     <fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthOptionPaneUI"/>
+    <fullyQualifiedTypeName name="step01.MemberReservationInfo"/>
+    <fullyQualifiedTypeName name="step01.NonReservInfo"/>
+    <fullyQualifiedTypeName name="java.io.Serializable"/>
 </qualifiedTypeNameHistroy>

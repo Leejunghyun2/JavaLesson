@@ -1,7 +1,8 @@
 package step01;
 
+import java.io.Serializable;
 
-public class User extends Consumer {
+public class User extends Consumer implements Serializable{
 	private String id;
 
 	private String pwd;

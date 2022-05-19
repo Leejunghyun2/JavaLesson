@@ -1,6 +1,8 @@
 package step01;
 
-public class NonReservInfo {
+import java.io.Serializable;
+
+public class NonReservInfo implements Serializable{
 	String name, seat ,tel;
 	int moviechoice;
 	

@@ -1,11 +1,15 @@
 package step01;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class NewMember {
 	private static NewMember member;
-
-	private User user = new User();
+	
 	final static String[] SIGN = new String[1]; 
 	public static NewMember getinfo() {
 		if (member == null) {
@@ -13,6 +17,9 @@ public class NewMember {
 			return member;
 		}
 		return member;
+	}
+	private NewMember() {
+		FileSearch();
 	}
 	
 	private static ArrayList<User> users;
@@ -23,6 +30,7 @@ public class NewMember {
 		}
 		return users;
 	}
+	String fileName="NewMember.ser";
 	
 	String signIn() {
 		 SIGN[0] = login();
@@ -79,7 +87,7 @@ public class NewMember {
 	}
 
 	User loginInfo() {
-		System.out.print("id ==>");
+		System.out.print("id ==> ");
 		String id = MovieReservation.sc.nextLine();
 		System.out.print("pwd ==> ");
 		String pwd = MovieReservation.sc.nextLine();
@@ -89,5 +97,65 @@ public class NewMember {
 		String phoneNumber = MovieReservation.sc.nextLine();
 
 		return new User(id, pwd, name, phoneNumber);
+	}
+	void ObjOutputData() {
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+
+		try {
+			
+			fos = new FileOutputStream(fileName);
+			out = new ObjectOutputStream(fos);
+
+			out.writeObject(users);
+			System.out.println("저장 되었습니다..");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (out != null) {
+					out.close();
+				}
+				if (fos != null) {
+					fos.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	@SuppressWarnings("unchecked")
+	void ObjInputData() {
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(fileName);
+			in = new ObjectInputStream(fis);
+
+			users = (ArrayList<User>) in.readObject();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (in != null) {
+					in.close();
+				}
+				if (fis != null) {
+					fis.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	void FileSearch() {
+		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\NewMember.ser");
+		if (!f.exists()) {
+			System.out.println("Start");
+		} else if (f.exists()) {
+			ObjInputData();
+			System.out.println("-----파일 불러오기 완료-----");
+		}
 	}
 }

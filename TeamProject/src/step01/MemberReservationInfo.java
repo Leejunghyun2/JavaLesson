@@ -1,6 +1,8 @@
 package step01;
 
-public class MemberReservationInfo {
+import java.io.Serializable;
+
+public class MemberReservationInfo implements Serializable {
 	String id, seat;
 	int moviechoice;
 

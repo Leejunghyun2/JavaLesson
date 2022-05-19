@@ -1,6 +1,8 @@
 package step01;
 
-public class Manager extends Consumer {
+import java.io.Serializable;
+
+public class Manager extends Consumer implements Serializable {
   int managerNum;
   
   Manager(int managerNum, String name) {
