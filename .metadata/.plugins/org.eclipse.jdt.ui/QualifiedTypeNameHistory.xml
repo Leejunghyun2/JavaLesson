@@ -53,11 +53,11 @@
     <fullyQualifiedTypeName name="chap02.FruitBox"/>
     <fullyQualifiedTypeName name="chap02.Eatable"/>
     <fullyQualifiedTypeName name="step01.NewMember"/>
-    <fullyQualifiedTypeName name="step01.MovieReservation"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="step01.ChoiceException"/>
     <fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthOptionPaneUI"/>
     <fullyQualifiedTypeName name="step01.MemberReservationInfo"/>
     <fullyQualifiedTypeName name="step01.NonReservInfo"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
+    <fullyQualifiedTypeName name="step01.MovieReservation"/>
 </qualifiedTypeNameHistroy>

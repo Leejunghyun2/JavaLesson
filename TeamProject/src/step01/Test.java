@@ -67,6 +67,9 @@ public class Test {
 				case 5:
 					mm.signOut();
 					break;
+				case 6:
+					users.MemberDelete();
+					break;
 				case 0:
 					mm.ObjOutputData();
 					users.ObjOutputData();

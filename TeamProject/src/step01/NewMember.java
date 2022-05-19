@@ -9,8 +9,9 @@ import java.util.ArrayList;
 
 public class NewMember {
 	private static NewMember member;
-	
-	final static String[] SIGN = new String[1]; 
+
+	final static String[] SIGN = new String[1];
+
 	public static NewMember getinfo() {
 		if (member == null) {
 			member = new NewMember();
@@ -18,27 +19,31 @@ public class NewMember {
 		}
 		return member;
 	}
+
 	private NewMember() {
 		FileSearch();
 	}
-	
+
 	private static ArrayList<User> users;
-	public static ArrayList<User> userInstance(){
-		if(users == null) {
+
+	public static ArrayList<User> userInstance() {
+		if (users == null) {
 			users = new ArrayList<User>();
 			return users;
 		}
 		return users;
 	}
-	String fileName="NewMember.ser";
-	
+
+	String fileName = "NewMember.ser";
+
 	String signIn() {
-		 SIGN[0] = login();
-		 if(SIGN[0]==null) {
-			 return null;
-		 }return SIGN[0];
+		SIGN[0] = login();
+		if (SIGN[0] == null) {
+			return null;
+		}
+		return SIGN[0];
 	}
-	
+
 	void input() {
 		User tmp = loginInfo();
 		for (int i = 0; i < users.size(); i++) {
@@ -50,6 +55,35 @@ public class NewMember {
 		users.add(tmp);
 		System.out.println("---------가입완료----------");
 
+	}
+
+	public static void MemberDelete() {
+		System.out.print("비밀번호를 입력하세요 ==> ");
+		String pwd = MovieReservation.sc.nextLine().trim();
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getId().equals(SIGN[0])) {
+				if (users.get(i).getPwd().equals(pwd)) {
+					System.out.print("정말 탈퇴하시겠습니까? 1. Yes 2. No\n");
+					System.out.print("==> ");
+					int choice = Integer.parseInt(MovieReservation.sc.nextLine());
+					if (choice == 1) {
+						for (i = 0; i < MovieReservation.mri.size(); i++) { // for(1)시작
+							if (MovieReservation.mri.get(i).id.equals(NewMember.SIGN[0])) {
+								MovieReservation.mri.remove(i);
+							} // if(3)시작
+						}
+					}
+					users.remove(i);
+					System.out.println("-----탈퇴완료-----");
+					SIGN[0] = null;
+				} else {
+					System.out.println("-----취소-----");
+					return;
+				}
+			} else {
+				System.out.println("비밀번호가 틀렸습니다.");
+			}
+		}
 	}
 
 	void showAllUser() {
@@ -98,12 +132,13 @@ public class NewMember {
 
 		return new User(id, pwd, name, phoneNumber);
 	}
+
 	void ObjOutputData() {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 
 		try {
-			
+
 			fos = new FileOutputStream(fileName);
 			out = new ObjectOutputStream(fos);
 
@@ -124,6 +159,7 @@ public class NewMember {
 			}
 		}
 	}
+
 	@SuppressWarnings("unchecked")
 	void ObjInputData() {
 		FileInputStream fis = null;
@@ -148,7 +184,7 @@ public class NewMember {
 			}
 		}
 	}
-	
+
 	void FileSearch() {
 		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\NewMember.ser");
 		if (!f.exists()) {

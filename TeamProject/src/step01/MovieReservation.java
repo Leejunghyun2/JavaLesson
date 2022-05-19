@@ -35,8 +35,8 @@ public class MovieReservation {
 	int moviechoice = 0, att, seatnum;
 	ArrayList<User> users = NewMember.userInstance();
 	ArrayList<Consumer> con = new ArrayList<Consumer>();
-	private static ArrayList<MemberReservationInfo> mri = new ArrayList<MemberReservationInfo>();
-	private static ArrayList<NonReservInfo> nri = new ArrayList<NonReservInfo>();
+	public static ArrayList<MemberReservationInfo> mri = new ArrayList<MemberReservationInfo>();
+	public static ArrayList<NonReservInfo> nri = new ArrayList<NonReservInfo>();
 
 	void movieChoice() throws ChoiceException {
 		MenuViewer.showMovieMenu();

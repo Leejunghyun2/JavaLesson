@@ -7,6 +7,7 @@ public class MenuViewer {
     System.out.println("3. ¿¹¸ÅÃë¼Ò");
     System.out.println("4. ÁÂ¼®Á¶È¸");
     System.out.println("5. ·Î±×¾Æ¿ô");
+    System.out.println("6. È¸¿øÅ»Åð");
     System.out.println("0. Ãë¼Ò" );
     System.out.print("==> ");
   }
