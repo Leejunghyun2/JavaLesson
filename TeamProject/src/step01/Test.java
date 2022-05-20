@@ -70,13 +70,18 @@ public class Test {
 				case 6:
 					users.MemberDelete();
 					break;
+				case 7:
+					mm.test();
+					break;
 				case 0:
 					mm.ObjOutputData();
 					users.ObjOutputData();
 					return;
 				}
 			} catch (ChoiceException e) {
-
+				System.out.println("잘못 입력하셨습니다.");
+			} catch(Exception e) {
+				System.out.println("잘못 입력하셨습니다.");
 			}
 		}
 	}

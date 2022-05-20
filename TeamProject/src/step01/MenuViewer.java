@@ -3,7 +3,7 @@ package step01;
 public class MenuViewer {
   static void showMenu() {
     System.out.println("1. 영화예매");
-    System.out.println("2. 예매확인" );
+    System.out.println("2. 예매확인");
     System.out.println("3. 예매취소");
     System.out.println("4. 좌석조회");
     System.out.println("5. 로그아웃");

@@ -35,6 +35,7 @@ public class NewMember {
 	}
 
 	String fileName = "NewMember.ser";
+	MovieReservation reserInfo = MovieReservation.getinstance();
 
 	String signIn() {
 		SIGN[0] = login();
@@ -57,31 +58,31 @@ public class NewMember {
 
 	}
 
-	public static void MemberDelete() {
+	void MemberDelete() {
 		System.out.print("비밀번호를 입력하세요 ==> ");
 		String pwd = MovieReservation.sc.nextLine().trim();
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getId().equals(SIGN[0])) {
 				if (users.get(i).getPwd().equals(pwd)) {
+					System.out.println("※회원으로 예매한 내역이 모두 취소됩니다※");
 					System.out.print("정말 탈퇴하시겠습니까? 1. Yes 2. No\n");
 					System.out.print("==> ");
 					int choice = Integer.parseInt(MovieReservation.sc.nextLine());
 					if (choice == 1) {
-						for (i = 0; i < MovieReservation.mri.size(); i++) { // for(1)시작
-							if (MovieReservation.mri.get(i).id.equals(NewMember.SIGN[0])) {
-								MovieReservation.mri.remove(i);
-							} // if(3)시작
-						}
+						reserInfo.AllCancle();
+						users.remove(i);
+						System.out.println("-----탈퇴완료-----");
+						SIGN[0]=null;
+						return;
+
+					} else {
+						System.out.println("취소");
+						return;
 					}
-					users.remove(i);
-					System.out.println("-----탈퇴완료-----");
-					SIGN[0] = null;
 				} else {
-					System.out.println("-----취소-----");
+					System.out.println("-----비밀번호가 틀렸습니다.-----");
 					return;
 				}
-			} else {
-				System.out.println("비밀번호가 틀렸습니다.");
 			}
 		}
 	}
@@ -186,7 +187,7 @@ public class NewMember {
 	}
 
 	void FileSearch() {
-		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\NewMember.ser");
+		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\NewMember.ser");
 		if (!f.exists()) {
 			System.out.println("Start");
 		} else if (f.exists()) {

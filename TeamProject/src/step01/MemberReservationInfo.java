@@ -5,11 +5,18 @@ import java.io.Serializable;
 public class MemberReservationInfo implements Serializable {
 	String id, seat;
 	int moviechoice;
+	String reserNum;
 
 	MemberReservationInfo(String id, int moviechoice, String seat) {
 		this.id = id;
 		this.moviechoice = moviechoice;
 		this.seat = seat;
+	}
+	MemberReservationInfo(String id, int moviechoice, String seat,String reserNum) {
+		this.id = id;
+		this.moviechoice = moviechoice;
+		this.seat = seat;
+		this.reserNum = reserNum;
 	}
 	public MemberReservationInfo() {
 		// TODO Auto-generated constructor stub
@@ -29,6 +36,6 @@ public class MemberReservationInfo implements Serializable {
 	}
 	
 	public String toString() {
-		return "영화관 제 " + moviechoice + "관" + seat + "번"; 
+		return "영화관 제 " + moviechoice + "관 " + seat + "번 " + "예매번호 : " +reserNum; 
 	}
 }
