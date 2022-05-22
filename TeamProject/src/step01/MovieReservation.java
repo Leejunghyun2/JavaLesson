@@ -60,24 +60,7 @@ public class MovieReservation {
 		}
 	}
 
-	void nonreserveConfirm() {
-		System.out.print("핸드폰번호를 입력해주세요 ==> ");
-		String tel = sc.nextLine();
-		for (int i = 0; i < nri.size(); i++) {
-			if (nri.get(i).phoneNumber.equals(tel)) {
-				System.out.printf("%s님의 예매내역\n", nri.get(i).name);
-				break;
-			}
-		}
-		for (int i = 0; i < nri.size(); i++) {
-			if (nri.get(i).phoneNumber.equals(tel)) {
-				System.out.printf("제 %s관 %s번\n 상영시간 : %s", nri.get(i).moviechoice, nri.get(i).seat,nri.get(i).movieTime);
-			} else {
-				System.out.println("예매된 내역이 없습니다.");
-				return;
-			}
-		}
-	}
+
 
 	void reservationAllCancle() {
 		int count = 0;
@@ -154,6 +137,31 @@ public class MovieReservation {
 			e.getMessage();
 		}catch(Exception e) {
 			
+		}
+	}
+	Consumer nonmemberInfo() {
+		System.out.print("이름을 입력하세요 ==> ");
+		name = sc.nextLine();
+		System.out.print("핸드폰번호를 입력하세요 ==> ");
+		tel = sc.nextLine();
+		return new Consumer(name, tel);
+	}
+	void nonreserveConfirm() {
+		System.out.print("핸드폰번호를 입력해주세요 ==> ");
+		String tel = sc.nextLine();
+		for (int i = 0; i < nri.size(); i++) {
+			if (nri.get(i).phoneNumber.equals(tel)) {
+				System.out.printf("%s님의 예매내역\n", nri.get(i).name);
+				break;
+			}
+		}
+		for (int i = 0; i < nri.size(); i++) {
+			if (nri.get(i).phoneNumber.equals(tel)) {
+				System.out.printf("제 %s관 %s번\n 상영시간 : %s", nri.get(i).moviechoice, nri.get(i).seat,nri.get(i).movieTime);
+			} else {
+				System.out.println("예매된 내역이 없습니다.");
+				return;
+			}
 		}
 	}
 
@@ -419,13 +427,7 @@ public class MovieReservation {
 		return -1;
 	}
 
-	Consumer nonmemberInfo() {
-		System.out.print("이름을 입력하세요 ==> ");
-		name = sc.nextLine();
-		System.out.print("핸드폰번호를 입력하세요 ==> ");
-		tel = sc.nextLine();
-		return new Consumer(name, tel);
-	}
+	
 
 	void AllCancle() {
 		for (int i = 0; i < mri.size(); i++) { // for(1)시작
@@ -547,7 +549,7 @@ public class MovieReservation {
 		}
 
 	}
-
+	
 	void NonMemberCancle() {
 		int count = 0;
 		int j = 0;
