@@ -9,9 +9,7 @@ import java.util.ArrayList;
 
 public class NewMember {
 	private static NewMember member;
-
 	final static String[] SIGN = new String[1];
-
 	public static NewMember getinfo() {
 		if (member == null) {
 			member = new NewMember();
@@ -19,7 +17,6 @@ public class NewMember {
 		}
 		return member;
 	}
-
 	private NewMember() {
 		FileSearch();
 	}
@@ -37,16 +34,14 @@ public class NewMember {
 	String fileName = "NewMember.ser";
 	MovieReservation reserInfo = MovieReservation.getinstance();
 
-	String signIn() {
-		SIGN[0] = login();
-		if (SIGN[0] == null) {
-			return null;
-		}
-		return SIGN[0];
-	}
+
 
 	void input() {
 		User tmp = loginInfo();
+		if(Search(tmp.getId()) == null){
+			System.out.println("영문자로시작하거나 2글자 이상이어야합니다.");
+			return;
+		}
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getId().equals(tmp.getId())) {
 				System.out.println("중복된 ID입니다.");
@@ -98,6 +93,12 @@ public class NewMember {
 		String id = MovieReservation.sc.nextLine().trim();
 		System.out.print("비밀번호를 입력하세요 ==> ");
 		String pwd = MovieReservation.sc.nextLine().trim();
+		if(Admin.Ad(id, pwd))
+		{
+			System.out.println("-----관리자 로그인-----");
+			SIGN[0] = "관리자";
+			return "관리자";
+		}
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getId().equals(id)) {
 				if (users.get(i).getPwd().equals(pwd)) {
@@ -112,6 +113,7 @@ public class NewMember {
 		SIGN[0] = null;
 		return null;
 	}
+	
 
 	public boolean searchList() {
 		if (users.isEmpty()) {
@@ -132,6 +134,18 @@ public class NewMember {
 		String phoneNumber = MovieReservation.sc.nextLine();
 
 		return new User(id, pwd, name, phoneNumber);
+	}
+	private String Search(String id) {
+		 if(id.length()<2) {
+			 System.out.println("글자수가 적습니다.");
+			 return null;
+		 }else if(!(id.charAt(0) >='A' && id.charAt(0) <= 'Z')) {
+			 if(!(id.charAt(0) >= 'a' && id.charAt(0) <= 'z')){
+				 return null;
+			 }
+		 }
+		 
+		 return id;
 	}
 
 	void ObjOutputData() {
@@ -187,7 +201,7 @@ public class NewMember {
 	}
 
 	void FileSearch() {
-		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\NewMember.ser");
+		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\NewMember.ser");
 		if (!f.exists()) {
 			System.out.println("Start");
 		} else if (f.exists()) {

@@ -4,31 +4,24 @@ import java.io.Serializable;
 
 public class User extends Consumer implements Serializable{
 	private String id;
-
 	private String pwd;
-
 	public String getId() {
 		return this.id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
 	public String getPwd() {
 		return this.pwd;
 	}
-
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-
 	User(String id, String pwd, String name, String phoneNumber) {
 		super(name, phoneNumber);
 		this.id = id;
 		this.pwd = pwd;
 	}
-
 	User() {
 	}
 

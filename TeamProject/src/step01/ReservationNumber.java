@@ -15,36 +15,48 @@ public class ReservationNumber {
 	Date date = new Date();
 	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 	private int count = 0;
-	private ReservationNumber(){
-	
-		
+	final String[] COMPARE = new String[1];
+
+	private ReservationNumber() {
+		FileSearch();
 	}
-	
+
 	public static ReservationNumber getInstance() {
-		if(num == null) {
+		if (num == null) {
 			num = new ReservationNumber();
 			return num;
-		}return num;
+		}
+		return num;
 	}
+
 	String GetReserNum() {
+		if (COMPARE[0] != null) {
+			if (!COMPARE[0].equals(Today())) {
+				count = 0;
+			}
+		}
+		COMPARE[0] = Today();
 		count++;
 		return ReserNum(count);
 	}
+
 	private String Today() {
 		return format.format(date);
 	}
+
 	private String ReserNum(int count) {
-		
-		if(count >999){
-			return Today()+String.valueOf(count);
-		}else if(count >99) {
-			return Today()+"0" + String.valueOf(count);
-		}else if(count >9) {
-			return Today()+"00"+String.valueOf(count);
-		}else {
-			return Today()+"000"+String.valueOf(count);
+
+		if (count > 999) {
+			return Today() + String.valueOf(count);
+		} else if (count > 99) {
+			return Today() + "0" + String.valueOf(count);
+		} else if (count > 9) {
+			return Today() + "00" + String.valueOf(count);
+		} else {
+			return Today() + "000" + String.valueOf(count);
 		}
 	}
+
 	@Override
 	public int hashCode() {
 		return ReserNum(count).hashCode(); // 주소의 해쉬코드도 비교해야해서 오버라이드
@@ -58,6 +70,7 @@ public class ReservationNumber {
 		}
 		return false;
 	}
+
 	void ObjOutputData() {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
@@ -67,8 +80,8 @@ public class ReservationNumber {
 			fos = new FileOutputStream(fileName);
 			out = new ObjectOutputStream(fos);
 
-			out.writeObject(num);
-			System.out.println("저장 되었습니다..");
+			out.writeObject(count);
+			out.writeObject(COMPARE[0]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -93,7 +106,8 @@ public class ReservationNumber {
 			fis = new FileInputStream(fileName);
 			in = new ObjectInputStream(fis);
 
-			num = (ReservationNumber) in.readObject();
+			count = (int) in.readObject();
+			COMPARE[0] = (String) in.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -111,12 +125,12 @@ public class ReservationNumber {
 	}
 
 	void FileSearch() {
-		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\reserNum.ser");
+		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\reserNum.ser");
 		if (!f.exists()) {
 		} else if (f.exists()) {
 			ObjInputData();
 			System.out.println("-----파일 불러오기 완료-----");
 		}
 	}
-	
+
 }

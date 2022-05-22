@@ -4,10 +4,54 @@ public class Test {
 	public static void main(String[] args) {
 		MovieReservation mm = MovieReservation.getinstance();
 		NewMember users = NewMember.getinfo();
-
+		ReservationNumber rn = ReservationNumber.getInstance();
+		Admin admin = Admin.getInstance();
+		MenuViewer menu = MenuViewer.getInstance();
 		while (true) {
 			try {
-				if (NewMember.SIGN[0] == null) { //비회원
+				if(NewMember.SIGN[0] != null) {
+					if (NewMember.SIGN[0].equals("관리자"))
+					{	
+						mm.MovieCheck();
+						MenuViewer.showAdminChoice();
+						int choice = Integer.parseInt(MovieReservation.sc.nextLine());
+						switch(choice) {
+						case 1:{
+							System.out.println("----구현x----");
+							continue;
+						}
+						case 2:{
+							admin.MovieManagement();
+							continue;
+						}
+						case 3:{
+							mm.showSeat();
+							continue;
+						}
+						case 4:
+							if (users.searchList()) {
+								System.out.println("회원 목록이 존재하지 않습니다.");
+								continue;
+							} else {
+								users.showAllUser();
+								continue;
+							}
+						case 5:{
+							mm.signOut();
+							continue;
+						}
+						case 0:{
+							mm.ObjOutputData();
+							users.ObjOutputData();
+							rn.ObjOutputData();
+							menu.ObjOutputData();
+							return;
+						}
+						}
+					}
+				}
+//-----------------------------------------비회원메뉴-----------------------------------------------
+				if (NewMember.SIGN[0] == null) { // 비회원
 					MenuViewer.showUserManagement();
 					int choice = Integer.parseInt(MovieReservation.sc.nextLine());
 					switch (choice) {
@@ -15,44 +59,42 @@ public class Test {
 						if (users.login() == null) {
 							System.out.println("로그인하세요.");
 							continue;
+						} else if (NewMember.SIGN[0].equals("관리자"))// 관리자모드
+						{
+							continue; // 코드 가독성을위해 위로보내버리는 작업
 						} else {
 							break;
-						}
+						} // 회원 로그인
+
 					case 2:
 						users.input();
 						continue;
 					case 3:
-						if (users.searchList()) {
-							System.out.println("회원 목록이 존재하지 않습니다.");
-							continue;
-						} else {
-							users.showAllUser();
-							continue;
-						}
-					case 4:
 						mm.nonMemberReser();
 						continue;
-					case 5:
+					case 4:
 						mm.nonreserveConfirm();
 						continue;
-					case 6:
+					case 5:
 						mm.reservationCancle();
 						continue;
-					case 7:
+					case 6:
 						mm.nonShowSeatStatus();
 						continue;
 					case 0:
 						mm.ObjOutputData();
 						users.ObjOutputData();
+						rn.ObjOutputData();
+						menu.ObjOutputData();
 						return;
 					}
-				}//비회원끝
-				//로그인 후 시작구간
+				} // 비회원끝
+//--------------------------------------비회원메뉴 끝 -----------------------------------------------
+//--------------------------------------회원메뉴 시작 -----------------------------------------------
 				MenuViewer.showMenu();
 				int choice = Integer.parseInt(MovieReservation.sc.nextLine());
 				switch (choice) {
 				case 1:
-					mm.movieChoice();
 					mm.seatChoice();
 					break;
 				case 2:
@@ -76,12 +118,15 @@ public class Test {
 				case 0:
 					mm.ObjOutputData();
 					users.ObjOutputData();
+					rn.ObjOutputData();
+					menu.ObjOutputData();
 					return;
+//---------------------------------------------회원메뉴 끝-----------------------------------------
 				}
 			} catch (ChoiceException e) {
 				System.out.println("잘못 입력하셨습니다.");
-			} catch(Exception e) {
-				System.out.println("잘못 입력하셨습니다.");
+			} catch (Exception e) {
+				e.getStackTrace();
 			}
 		}
 	}

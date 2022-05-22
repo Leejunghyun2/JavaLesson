@@ -2,21 +2,25 @@ package step01;
 
 import java.io.Serializable;
 
-public class MemberReservationInfo implements Serializable {
+public class MemberReservationInfo extends Consumer implements Serializable {
 	String id, seat;
-	int moviechoice;
+	int moviechoice,movieTimeChoice;
 	String reserNum;
+	String movieTime;
+	
 
 	MemberReservationInfo(String id, int moviechoice, String seat) {
 		this.id = id;
 		this.moviechoice = moviechoice;
 		this.seat = seat;
 	}
-	MemberReservationInfo(String id, int moviechoice, String seat,String reserNum) {
+	MemberReservationInfo(String id, int moviechoice, String seat,String reserNum,String movieTime,int movieTimeChoice) {
 		this.id = id;
 		this.moviechoice = moviechoice;
 		this.seat = seat;
 		this.reserNum = reserNum;
+		this.movieTime = movieTime;
+		this.movieTimeChoice = movieTimeChoice;
 	}
 	public MemberReservationInfo() {
 		// TODO Auto-generated constructor stub
@@ -36,6 +40,6 @@ public class MemberReservationInfo implements Serializable {
 	}
 	
 	public String toString() {
-		return "영화관 제 " + moviechoice + "관 " + seat + "번 " + "예매번호 : " +reserNum; 
+		return "영화관 제 " + moviechoice + "관 " + seat + "번 " + "예매번호 : " +reserNum + "\n영화시간 : "+movieTime;
 	}
 }

@@ -5,23 +5,30 @@ import java.util.Date;
 
 public class ReservationNumber {
 	private static ReservationNumber num;
-	
+	public static String[][][][] movie11,movie22,movie33 =null;
+	public static String[] movieTime11,movieTime22,movieTime33=null;
 	Date date = new Date();
 	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 	int count = 0;
 	private ReservationNumber(){
 		
 	}
-	
+	final String[] COMPARE = new String[2];
 	public static ReservationNumber getInstance() {
 		if(num == null) {
 			num = new ReservationNumber();
 			return num;
 		}return num;
 	}
-	void GetReserNum() {
+	String GetReserNum() {
+		if(COMPARE[0] != null) {
+			if(!COMPARE[0].equals(Today())){
+				count = 0;
+			}
+		}
+		COMPARE[0]=Today();
 		count++;
-		ReserNum(count);
+		return ReserNum(count);
 	}
 	String Today() {
 		return format.format(date);
@@ -38,5 +45,4 @@ public class ReservationNumber {
 			return Today()+"000"+String.valueOf(count);
 		}
 	}
-	
 }
