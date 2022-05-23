@@ -35,19 +35,16 @@
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="step01.ReservationNumber"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
-    <fullyQualifiedTypeName name="step01.NewMember"/>
     <fullyQualifiedTypeName name="java.lang.NumberFormatException"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="Test.ReservationNumber"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="step01.MovieReservation"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="step01.ChoiceException"/>
     <fullyQualifiedTypeName name="chap05.ThreadEx1_1"/>
     <fullyQualifiedTypeName name="chap05.ThreadEx1_2"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-    <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="chap06_2.AdderThread"/>
     <fullyQualifiedTypeName name="Thread.Increment"/>
     <fullyQualifiedTypeName name="Thread.IncThread"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="chap08.NewsReader"/>
     <fullyQualifiedTypeName name="chap08.NewsWriter"/>
     <fullyQualifiedTypeName name="java.lang.InterruptedException"/>
+    <fullyQualifiedTypeName name="step01.NewMember"/>
+    <fullyQualifiedTypeName name="step01.MovieReservation"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
 </qualifiedTypeNameHistroy>

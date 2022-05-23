@@ -43,7 +43,7 @@ public class NewMember {
 			return;
 		}
 		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).getId().equals(tmp.getId())) {
+			if (users.get(i).getId1(tmp.getId())) {
 				System.out.println("중복된 ID입니다.");
 				return;
 			}
@@ -57,8 +57,8 @@ public class NewMember {
 		System.out.print("비밀번호를 입력하세요 ==> ");
 		String pwd = MovieReservation.sc.nextLine().trim();
 		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).getId().equals(SIGN[0])) {
-				if (users.get(i).getPwd().equals(pwd)) {
+			if (users.get(i).getId1(SIGN[0])) {
+				if (users.get(i).getPwd1(pwd)) {
 					System.out.println("※회원으로 예매한 내역이 모두 취소됩니다※");
 					System.out.print("정말 탈퇴하시겠습니까? 1. Yes 2. No\n");
 					System.out.print("==> ");
@@ -82,11 +82,7 @@ public class NewMember {
 		}
 	}
 
-	void showAllUser() {
-		for (int i = 0; i < users.size(); i++) {
-			users.get(i).showInfo();
-		}
-	}
+	
 
 	String login() {
 		System.out.print("ID를 입력하세요 ==> ");
@@ -100,14 +96,14 @@ public class NewMember {
 			return "관리자";
 		}
 		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).getId().equals(id)) {
-				if (users.get(i).getPwd().equals(pwd)) {
+			if (users.get(i).getId1(id)) {
+				if (users.get(i).getPwd1(pwd)) {
 					System.out.println("---로그인 완료---");
 					SIGN[0] = id;
-					return id;
+					return users.get(i).name;
 				}
 			}
-
+			
 		}
 		System.out.println("----잘못 입력 하셨습니다.----");
 		SIGN[0] = null;
@@ -201,7 +197,7 @@ public class NewMember {
 	}
 
 	void FileSearch() {
-		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\NewMember.ser");
+		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\NewMember.ser");
 		if (!f.exists()) {
 			System.out.println("Start");
 		} else if (f.exists()) {

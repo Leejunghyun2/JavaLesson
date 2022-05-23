@@ -19,7 +19,7 @@ public class MenuViewer {
 		}return e;
 		
 	}
-	static String movieName1 = null, movieName2 = null, movieName3 = null;
+	static String movieName[] = new String[3];
     String fileName = "MenuViwer.ser";
 	static void showMenu() {
 		System.out.println("1. 영화예매");
@@ -33,19 +33,15 @@ public class MenuViewer {
 	}
 
 	static void showMovieMenu() {
+		
 
-		if (movieName1 == null) {
-			movieName1 = "개설되지않은영화관";
-		}
-		System.out.println("1. " + movieName1);
-		if (movieName2 == null) {
-			movieName2 = "개설되지않은영화관";
-		}
-		System.out.println("2. " + movieName2);
-		if (movieName3 == null) {
-			movieName3 = "개설되지않은영화관";
-		}
-		System.out.println("3. " + movieName3);
+		for(int i=0; i<movieName.length; i++)
+			if(movieName[i]==null) {
+				movieName[i] = "개설되지않은영화관";
+			}
+		System.out.println("1. " + movieName[0]);
+		System.out.println("2. " + movieName[1]);
+		System.out.println("3. " + movieName[2]);
 		System.out.println("0. 취소");
 		System.out.print("==> ");
 	}
@@ -67,7 +63,6 @@ public class MenuViewer {
 		System.out.println("3. 테스트");
 		System.out.println("4. 회원목록");
 		System.out.println("5. 로그아웃");
-		System.out.println("0. 취소");
 		System.out.print("==> ");
 	}
 
@@ -83,9 +78,7 @@ public class MenuViewer {
 			fos = new FileOutputStream(fileName);
 			out = new ObjectOutputStream(fos);
 
-			out.writeObject(movieName1);
-			out.writeObject(movieName2);
-			out.writeObject(movieName3);
+			out.writeObject(movieName);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,9 +104,7 @@ public class MenuViewer {
 			fis = new FileInputStream(fileName);
 			in = new ObjectInputStream(fis);
 
-			movieName1 = (String) in.readObject();
-			movieName2 = (String) in.readObject();
-			movieName3 = (String) in.readObject();
+			movieName = (String[]) in.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -131,7 +122,7 @@ public class MenuViewer {
 	}
 
 	void FileSearch() {
-		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\MenuViwer.ser");
+		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\MenuViwer.ser");
 		if (!f.exists()) {
 		} else if (f.exists()) {
 			ObjInputData();

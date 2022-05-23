@@ -12,43 +12,9 @@ public class Test {
 				if(NewMember.SIGN[0] != null) {
 					if (NewMember.SIGN[0].equals("관리자"))
 					{	
-						mm.MovieCheck();
-						MenuViewer.showAdminChoice();
-						int choice = Integer.parseInt(MovieReservation.sc.nextLine());
-						switch(choice) {
-						case 1:{
-							System.out.println("----구현x----");
-							continue;
-						}
-						case 2:{
-							admin.MovieManagement();
-							continue;
-						}
-						case 3:{
-							mm.showSeat();
-							continue;
-						}
-						case 4:
-							if (users.searchList()) {
-								System.out.println("회원 목록이 존재하지 않습니다.");
-								continue;
-							} else {
-								users.showAllUser();
-								continue;
-							}
-						case 5:{
-							mm.signOut();
-							continue;
-						}
-						case 0:{
-							mm.ObjOutputData();
-							users.ObjOutputData();
-							rn.ObjOutputData();
-							menu.ObjOutputData();
-							return;
-						}
-						}
+						admin.adminChoice();
 					}
+					continue;
 				}
 //-----------------------------------------비회원메뉴-----------------------------------------------
 				if (NewMember.SIGN[0] == null) { // 비회원
@@ -126,7 +92,7 @@ public class Test {
 			} catch (ChoiceException e) {
 				System.out.println("잘못 입력하셨습니다.");
 			} catch (Exception e) {
-				e.getStackTrace();
+				System.out.println(e.getStackTrace());
 			}
 		}
 	}

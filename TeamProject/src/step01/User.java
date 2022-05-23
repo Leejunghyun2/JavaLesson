@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class User extends Consumer implements Serializable{
 	private String id;
 	private String pwd;
-	public String getId() {
+	protected String getId() {
 		return this.id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPwd() {
+	protected String getPwd() {
 		return this.pwd;
 	}
 	public void setPwd(String pwd) {
@@ -24,8 +24,17 @@ public class User extends Consumer implements Serializable{
 	}
 	User() {
 	}
-
-	void showInfo() {
+	public boolean getPwd1(String pwd) {
+		 if(this.pwd.equals(pwd)) {
+			 return true;
+		 }return false;
+	}
+	public boolean getId1(String id) {
+		 if(this.id.equals(id)) {
+			 return true;
+		 }return false;
+	}
+	protected void showInfo() {
 		System.out.printf(" %s : %s : %s : %s \n", id, pwd, name, phoneNumber);
 	}
 
