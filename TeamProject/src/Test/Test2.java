@@ -21,5 +21,8 @@ public class Test2 {
 			System.out.println();
 		}
 		
+		for(int i=0; i<9;i++) {
+			System.out.println(s[0][0][2][i]);
+		}
 	}
 }
