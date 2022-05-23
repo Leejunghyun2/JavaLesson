@@ -201,7 +201,7 @@ public class NewMember {
 	}
 
 	void FileSearch() {
-		File f = new File("C:\\Users\\ÀÌÁ¤Çö\\eclipse-workspace\\TeamProject\\NewMember.ser");
+		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\NewMember.ser");
 		if (!f.exists()) {
 			System.out.println("Start");
 		} else if (f.exists()) {

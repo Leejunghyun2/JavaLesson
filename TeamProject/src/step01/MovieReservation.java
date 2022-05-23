@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class MovieReservation {
 	static Scanner sc = new Scanner(System.in);
 	private static MovieReservation s;
-	static String[][][][] movie1, movie2, movie3;
+	static String[][][] movie1, movie2, movie3;
 	static String[] movieTime1, movieTime2, movieTime3;
 
 	private MovieReservation() {
@@ -131,33 +131,33 @@ public class MovieReservation {
 
 	void nonMemberReser() throws ChoiceException {
 		try {
-		con.add(nonmemberInfo());
+		nonmemberInfo();
 		seatChoice();
 		}catch(ChoiceException e) {
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}catch(Exception e) {
-			
+			System.out.println(e.getMessage());
 		}
 	}
-	Consumer nonmemberInfo() {
+	void nonmemberInfo() {
 		System.out.print("이름을 입력하세요 ==> ");
 		name = sc.nextLine();
 		System.out.print("핸드폰번호를 입력하세요 ==> ");
 		tel = sc.nextLine();
-		return new Consumer(name, tel);
+		
 	}
 	void nonreserveConfirm() {
 		System.out.print("핸드폰번호를 입력해주세요 ==> ");
-		String tel = sc.nextLine();
+		String phoneNumber = sc.nextLine();
 		for (int i = 0; i < nri.size(); i++) {
-			if (nri.get(i).phoneNumber.equals(tel)) {
+			if (nri.get(i).phoneNumber.equals(phoneNumber)) {
 				System.out.printf("%s님의 예매내역\n", nri.get(i).name);
 				break;
 			}
 		}
 		for (int i = 0; i < nri.size(); i++) {
-			if (nri.get(i).phoneNumber.equals(tel)) {
-				System.out.printf("제 %s관 %s번\n 상영시간 : %s", nri.get(i).moviechoice, nri.get(i).seat,nri.get(i).movieTime);
+			if (nri.get(i).phoneNumber.equals(phoneNumber)) {
+				System.out.printf("제 %s관 %s번\n 상영시간 : %s\n", nri.get(i).moviechoice, nri.get(i).seat,nri.get(i).movieTime);
 			} else {
 				System.out.println("예매된 내역이 없습니다.");
 				return;
@@ -179,10 +179,10 @@ public class MovieReservation {
 		switch (i) {
 		case 1:
 			if (movie1 != null) {
-				for (int time = 0; time < movie1[0].length; time++) {
-					for (int col = 0; col < movie1[0][time].length; col++) {
-						for (int row = 0; row < movie1[0][time][col].length; row++) {
-							movie1[i - 1][time][col][row] = ((char) (col + 65)) + "" + (row + 1) + "";
+				for (int time = 0; time < movie1.length; time++) {
+					for (int col = 0; col < movie1[time].length; col++) {
+						for (int row = 0; row < movie1[time][col].length; row++) {
+							movie1[time][col][row] = ((char) (col + 65)) + "" + (row + 1) + "";
 						}
 					}
 				}
@@ -190,10 +190,10 @@ public class MovieReservation {
 			break;
 		case 2:
 			if (movie2 != null) {
-				for (int time = 0; time < movie2[0].length; time++) {
-					for (int col = 0; col < movie2[0][time].length; col++) {
-						for (int row = 0; row < movie2[0][time][col].length; row++) {
-							movie2[i - 1][time][col][row] = ((char) (col + 65)) + "" + (row + 1) + "";
+				for (int time = 0; time < movie2.length; time++) {
+					for (int col = 0; col < movie2[time].length; col++) {
+						for (int row = 0; row < movie2[time][col].length; row++) {
+							movie2[time][col][row] = ((char) (col + 65)) + "" + (row + 1) + "";
 						}
 					}
 				}
@@ -201,10 +201,10 @@ public class MovieReservation {
 			break;
 		case 3:
 			if (movie3 != null) {
-				for (int time = 0; time < movie3[0].length; time++) {
-					for (int col = 0; col < movie3[0][time].length; col++) {
-						for (int row = 0; row < movie3[0][time][col].length; row++) {
-							movie3[i - 1][time][col][row] = ((char) (col + 65)) + "" + (row + 1) + "";
+				for (int time = 0; time < movie3.length; time++) {
+					for (int col = 0; col < movie3[time].length; col++) {
+						for (int row = 0; row < movie3[time][col].length; row++) {
+							movie3[time][col][row] = ((char) (col + 65)) + "" + (row + 1) + "";
 						}
 					}
 				}
@@ -243,25 +243,25 @@ public class MovieReservation {
 		System.out.println("영화관 제 " + moviechoice + " 관 시간:" + movieTimeCheck(moviechoice, movieTimeChoice));
 		switch (moviechoice) {
 		case 1:
-			for (int i = 0; i < (movie1[moviechoice - 1][movieTimeChoice - 1]).length; i++) {
-				for (int j = 0; j < (movie1[moviechoice - 1][movieTimeChoice - 1][i]).length; j++) {
-					System.out.print((movie1[moviechoice - 1][movieTimeChoice - 1][i][j]) + " ");
+			for (int i = 0; i < (movie1[movieTimeChoice - 1]).length; i++) {
+				for (int j = 0; j < (movie1[movieTimeChoice - 1][i]).length; j++) {
+					System.out.print((movie1[movieTimeChoice - 1][i][j]) + " ");
 				}
 				System.out.println();
 			}
 			break;
 		case 2:
-			for (int i = 0; i < (movie2[moviechoice - 1][movieTimeChoice - 1]).length; i++) {
-				for (int j = 0; j < (movie2[moviechoice - 1][movieTimeChoice - 1][i]).length; j++) {
-					System.out.print((movie2[moviechoice - 1][movieTimeChoice - 1][i][j]) + " ");
+			for (int i = 0; i < (movie2[movieTimeChoice - 1]).length; i++) {
+				for (int j = 0; j < (movie2[movieTimeChoice - 1][i]).length; j++) {
+					System.out.print((movie2[movieTimeChoice - 1][i][j]) + " ");
 				}
 				System.out.println();
 			}
 			break;
 		case 3:
 			for (int i = 0; i < (movie3[moviechoice - 1][movieTimeChoice - 1]).length; i++) {
-				for (int j = 0; j < (movie3[moviechoice - 1][movieTimeChoice - 1][i]).length; j++) {
-					System.out.print((movie3[moviechoice - 1][movieTimeChoice - 1][i][j]) + " ");
+				for (int j = 0; j < (movie3[movieTimeChoice - 1][i]).length; j++) {
+					System.out.print((movie3[movieTimeChoice - 1][i][j]) + " ");
 				}
 				System.out.println();
 			}
@@ -284,7 +284,7 @@ public class MovieReservation {
 					
 					case 1:
 						if(movie1 != null) {
-						if ("XX".equals(movie1[moviechoice - 1][movieTimeChoice - 1][att][seatnum])) {
+						if ("XX".equals(movie1[movieTimeChoice - 1][att][seatnum])) {
 							System.out.print("이미 예매 되어있는자리입니다.\n");
 							System.out.print("다시 선택해주세요.\n");
 							continue;
@@ -292,7 +292,7 @@ public class MovieReservation {
 						}
 					case 2:
 						if(movie2 != null) {
-						if ("XX".equals(movie2[moviechoice - 1][movieTimeChoice - 1][att][seatnum])) {
+						if ("XX".equals(movie2[movieTimeChoice - 1][att][seatnum])) {
 							System.out.print("이미 예매 되어있는자리입니다.\n");
 							System.out.print("다시 선택해주세요.\n");
 							continue;
@@ -300,7 +300,7 @@ public class MovieReservation {
 						}
 					case 3:
 						if(movie3 != null) {
-						if ("XX".equals(movie3[moviechoice - 1][movieTimeChoice - 1][att][seatnum])) {
+						if ("XX".equals(movie3[movieTimeChoice - 1][att][seatnum])) {
 							System.out.print("이미 예매 되어있는자리입니다.\n");
 							System.out.print("다시 선택해주세요.\n");
 							continue;
@@ -320,21 +320,21 @@ public class MovieReservation {
 					String timetmp = null;
 					switch (moviechoice) {
 					case 1:
-						movie1[moviechoice - 1][movieTimeChoice - 1][att][seatnum] = "XX";
+						movie1[movieTimeChoice - 1][att][seatnum] = "XX";
 						System.out.println("--------예매완료--------");
 						System.out.println("영화관 제 " + moviechoice + "관\n" + "좌석 : " + at + "\n상영시간 : "
 								+ movieTime1[movieTimeChoice - 1]);
 						timetmp = movieTime1[movieTimeChoice - 1];
 						break;
 					case 2:
-						movie2[moviechoice - 1][movieTimeChoice - 1][att][seatnum] = "XX";
+						movie2[movieTimeChoice - 1][att][seatnum] = "XX";
 						System.out.println("--------예매완료--------");
 						System.out.println("영화관 제 " + moviechoice + "관\n" + "좌석 : " + at + "\n상영시간 : "
 								+ movieTime2[movieTimeChoice - 1]);
 						timetmp = movieTime2[movieTimeChoice - 1];
 						break;
 					case 3:
-						movie3[moviechoice - 1][movieTimeChoice - 1][att][seatnum] = "XX";
+						movie3[movieTimeChoice - 1][att][seatnum] = "XX";
 						System.out.println("--------예매완료--------");
 						System.out.println("영화관 제 " + moviechoice + "관\n" + "좌석 : " + at + "\n상영시간 : "
 								+ movieTime3[movieTimeChoice - 1]);
@@ -469,9 +469,10 @@ public class MovieReservation {
 				System.out.println("-----취소완료-----");
 				count = 0;
 				mri.remove((int) (buffer.get(num - 1)));
-				buffer.remove(num - 1);
+				buffer.clear();
 			} else {
 				System.out.println("------취소안함-------");
+				buffer.clear();
 				return;
 			}
 
@@ -484,9 +485,10 @@ public class MovieReservation {
 				System.out.println("----취소완료----");
 				count = 0;
 				mri.remove((int)buffer.get(0));
-				buffer.remove(0);
+				buffer.clear();
 			} else {
 				System.out.println("------취소안함-------");
+				buffer.clear();
 				return;
 			}
 		}
@@ -495,19 +497,19 @@ public class MovieReservation {
 	void memberSeatCancleSearch(int i) {
 		switch (mri.get(buffer.get(i)).moviechoice) {
 		case 1:
-			movie1[mri.get(buffer.get(i)).moviechoice - 1]
+			movie1
 					[mri.get(buffer.get(i)).movieTimeChoice-1]
 							[numSearch(mri.get(buffer.get(i)).seat.charAt(0))]
 									[getNum(mri.get(buffer.get(i)).seat.charAt(1))] = mri.get(buffer.get(i)).seat;
 			break;
 		case 2:
-			movie2[mri.get(buffer.get(i)).moviechoice - 1]
+			movie2
 					[mri.get(buffer.get(i)).movieTimeChoice-1]
 							[numSearch(mri.get(buffer.get(i)).seat.charAt(0))]
 									[getNum(mri.get(buffer.get(i)).seat.charAt(1))] = mri.get(buffer.get(i)).seat;
 			break;
 		case 3:
-			movie3[mri.get(buffer.get(i)).moviechoice - 1]
+			movie3
 					[mri.get(buffer.get(i)).movieTimeChoice-1]
 							[numSearch(mri.get(buffer.get(i)).seat.charAt(0))]
 							[getNum(mri.get(buffer.get(i)).seat.charAt(1))] = mri.get(buffer.get(i)).seat;
@@ -517,19 +519,19 @@ public class MovieReservation {
 	void nonMemberSeatCancleSearch(int i) {
 		switch (nri.get(buffer.get(i)).moviechoice) {
 		case 1:
-			movie1[nri.get(buffer.get(i)).moviechoice - 1]
+			movie1
 					[nri.get(buffer.get(i)).movieTimeChoice-1]
 							[numSearch(nri.get(buffer.get(i)).seat.charAt(0))]
 									[getNum(nri.get(buffer.get(i)).seat.charAt(1))] = nri.get(buffer.get(i)).seat;
 			break;
 		case 2:
-			movie2[nri.get(buffer.get(i)).moviechoice - 1]
+			movie2
 					[nri.get(buffer.get(i)).movieTimeChoice-1]
 							[numSearch(nri.get(buffer.get(i)).seat.charAt(0))]
 									[getNum(nri.get(buffer.get(i)).seat.charAt(1))] = nri.get(buffer.get(i)).seat;
 			break;
 		case 3:
-			movie3[nri.get(buffer.get(i)).moviechoice - 1]
+			movie3
 					[nri.get(buffer.get(i)).movieTimeChoice-1]
 							[numSearch(nri.get(buffer.get(i)).seat.charAt(0))]
 							[getNum(nri.get(buffer.get(i)).seat.charAt(1))] = nri.get(buffer.get(i)).seat;
@@ -553,9 +555,10 @@ public class MovieReservation {
 	void NonMemberCancle() {
 		int count = 0;
 		int j = 0;
+		String tel;
 		while (true) {
 			System.out.print("핸드폰번호를 입력해주세요 ==> ");
-			String tel = sc.nextLine();
+			tel = sc.nextLine();
 			if (tel.length() != 11) {
 				System.out.println("잘못 입력하셧습니다. 다시 입력해주세요");
 				continue;
@@ -587,13 +590,14 @@ public class MovieReservation {
 				System.out.println("---- 취소완료 ----");
 				count = 0;
 				nri.remove((int) (buffer.get(num - 1)));
-				buffer.remove(buffer.get(num - 1));
+				buffer.clear();
 			} else {
 				System.out.println("------취소종료------");
+				buffer.clear();
 				return;
 			}
 
-		} else {
+		} else if(count == 1){
 			System.out.println("예매 취소하시겠습니까?");
 			System.out.printf(nri.get(buffer.get(0)) + "\n 1. Yes 2. No ==> ");
 			int choice = Integer.parseInt(sc.nextLine());
@@ -602,9 +606,10 @@ public class MovieReservation {
 				System.out.println("----취소완료----");
 				count = 0;
 				nri.remove((int) buffer.get(0));
-				buffer.remove(0);
+				buffer.clear();
 			} else {
 				System.out.println("----취소안함----");
+				buffer.clear();
 				return;
 			}
 		}
@@ -655,9 +660,9 @@ public class MovieReservation {
 			con = (ArrayList<Consumer>) in.readObject();
 			mri = (ArrayList<MemberReservationInfo>) in.readObject();
 			nri = (ArrayList<NonReservInfo>) in.readObject();
-			movie1 = (String[][][][])in.readObject();
-			movie2 = (String[][][][])in.readObject();
-			movie3 = (String[][][][])in.readObject();
+			movie1 = (String[][][])in.readObject();
+			movie2 = (String[][][])in.readObject();
+			movie3 = (String[][][])in.readObject();
 			movieTime1 = (String[])in.readObject();
 			movieTime2 = (String[])in.readObject();
 			movieTime3 = (String[])in.readObject();
@@ -678,7 +683,7 @@ public class MovieReservation {
 	}
 
 	void FileSearch() {
-		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\MovieReservation.ser");
+		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\MovieReservation.ser");
 		if (!f.exists()) {
 		} else if (f.exists()) {
 			ObjInputData();

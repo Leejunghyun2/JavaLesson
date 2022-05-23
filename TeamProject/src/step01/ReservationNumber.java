@@ -125,7 +125,7 @@ public class ReservationNumber {
 	}
 
 	void FileSearch() {
-		File f = new File("C:\\Users\\ÀÌÁ¤Çö\\eclipse-workspace\\TeamProject\\reserNum.ser");
+		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\reserNum.ser");
 		if (!f.exists()) {
 		} else if (f.exists()) {
 			ObjInputData();

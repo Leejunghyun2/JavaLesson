@@ -131,7 +131,7 @@ public class MenuViewer {
 	}
 
 	void FileSearch() {
-		File f = new File("C:\\Users\\ÀÌÁ¤Çö\\eclipse-workspace\\TeamProject\\MenuViwer.ser");
+		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\MenuViwer.ser");
 		if (!f.exists()) {
 		} else if (f.exists()) {
 			ObjInputData();

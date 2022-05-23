@@ -76,15 +76,15 @@ public class Admin extends User implements Serializable {
 	void MovieSearch(int choice, int num) {
 		switch (choice) {
 		case 1:
-			MovieReservation.movie1 = new String[3][num][6][6];
+			MovieReservation.movie1 = new String[num][6][6];
 			MovieReservation.movieTime1 = new String[num];
 			break;
 		case 2:
-			MovieReservation.movie2 = new String[3][num][6][6];
+			MovieReservation.movie2 = new String[num][6][6];
 			MovieReservation.movieTime2 = new String[num];
 			break;
 		case 3:
-			MovieReservation.movie3 = new String[3][num][6][6];
+			MovieReservation.movie3 = new String[num][6][6];
 			MovieReservation.movieTime3 = new String[num];
 			break;
 		}
