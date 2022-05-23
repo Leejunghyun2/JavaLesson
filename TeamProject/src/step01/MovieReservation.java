@@ -193,7 +193,9 @@ public class MovieReservation {
 				System.out.println("개설된 영화가 없습니다.");
 				return false;
 			}
-			movieTime();
+			for (int count = 1; count <= movieTime[moviechoice - 1].length; count++) {
+				System.out.println(count + " :" + movieTime[moviechoice - 1][count - 1]);
+			}
 			System.out.print("시간 선택 : ");
 			movieTimeChoice = Integer.parseInt(sc.nextLine());
 			System.out.println("영화관 제 " + moviechoice + " 관 시간:" + movieTime[moviechoice-1][movieTimeChoice-1]);
@@ -260,21 +262,7 @@ public class MovieReservation {
 			}
 		} 
 			return;
-		
 	} // 예약수정완료
-
-	String movieTimeCheck(int i, int j) { // seatTest에 시간찾아서 보여주는 메소드
-		if (i < 1 || i > 3) {
-			return movieTime[i - 1][j - 1];
-		}
-		return null;
-	}
-
-	void movieTime() {
-		for (int count = 1; count <= movieTime[moviechoice - 1].length; count++) {
-			System.out.println(count + " :" + movieTime[moviechoice - 1][count - 1]);
-		}
-	}
 
 	boolean movieChoice() throws ChoiceException {
 		MenuViewer.showMovieMenu();
