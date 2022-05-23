@@ -6,36 +6,20 @@ import java.util.Scanner;
 
 public class Test2 {
 	public static void main(String[] args) {
-		while(true) {
-			Scanner sc = new Scanner(System.in);
-			int a = Integer.parseInt(sc.nextLine());
-			if(a==0) {
-				return;
+		String[][][][] s = new String[3][6][6][9];
+		for (int time = 0; time < s[0][0][0].length; time++) {
+			for (int col = 0; col < s[0].length; col++) {
+				for (int row = 0; row < s[0][col].length; row++) {
+					s[0][col][row][time] = ((char) (col + 65)) + "" + (row + 1) + "";
+				}
 			}
-			if(a==1) {
-				continue;
+		}
+		for (int i = 0; i < (s[0]).length; i++) {
+			for (int j = 0; j < (s[0][i]).length; j++) {
+				System.out.print((s[0][i][j][7]) + " ");
 			}
-		String[][][] s = new String[3][][];
-		s[0] = new String[5][3];
-		s[1] = new String[4][3];
-		s[2] = new String[6][3];
+			System.out.println();
+		}
 		
-		for(int i=0;i<s[0].length;i++) {
-		System.out.println("12");
-		}
-		for(int i=0;i<s[1].length;i++) {
-			System.out.println("11");
-			}
-		for(int i=0;i<s[2].length;i++) {
-			for(int j=0; j<s[2][i].length;j++)
-
-System.out.println("13");
-			}
-		continue;
-		}
 	}
-	
-	
-	
-	
 }
