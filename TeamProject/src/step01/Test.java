@@ -13,8 +13,9 @@ public class Test {
 					if (NewMember.SIGN[0].equals("관리자"))
 					{	
 						admin.adminChoice();
+						continue;
 					}
-					continue;
+					
 				}
 //-----------------------------------------비회원메뉴-----------------------------------------------
 				if (NewMember.SIGN[0] == null) { // 비회원
@@ -22,14 +23,9 @@ public class Test {
 					int choice = Integer.parseInt(MovieReservation.sc.nextLine());
 					switch (choice) {
 					case 1:
-						if (users.login() == null) {
+						users.login(); {
 							System.out.println("로그인하세요.");
 							continue;
-						} else if (NewMember.SIGN[0].equals("관리자"))// 관리자모드
-						{
-							continue; // 코드 가독성을위해 위로보내버리는 작업
-						} else {
-							break;
 						} // 회원 로그인
 
 					case 2:

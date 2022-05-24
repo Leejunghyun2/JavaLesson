@@ -84,7 +84,7 @@ public class NewMember {
 
 	
 
-	String login() {
+	void login() {
 		System.out.print("ID를 입력하세요 ==> ");
 		String id = MovieReservation.sc.nextLine().trim();
 		System.out.print("비밀번호를 입력하세요 ==> ");
@@ -93,21 +93,21 @@ public class NewMember {
 		{
 			System.out.println("-----관리자 로그인-----");
 			SIGN[0] = "관리자";
-			return "관리자";
+			return;
 		}
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getId1(id)) {
 				if (users.get(i).getPwd1(pwd)) {
 					System.out.println("---로그인 완료---");
 					SIGN[0] = id;
-					return users.get(i).name;
+					return;
 				}
 			}
 			
 		}
 		System.out.println("----잘못 입력 하셨습니다.----");
 		SIGN[0] = null;
-		return null;
+		return;
 	}
 	
 

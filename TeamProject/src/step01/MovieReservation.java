@@ -41,7 +41,7 @@ public class MovieReservation {
 			System.out.println(mri.get(i));
 		}
 	}
-	
+
 	void reservationConfirm() {
 		if (NewMember.SIGN[0] != null) {
 			for (int i = 0; i < mri.size(); i++) {
@@ -143,7 +143,7 @@ public class MovieReservation {
 		name = sc.nextLine();
 		System.out.print("핸드폰번호를 입력하세요 ==> ");
 		tel = sc.nextLine();
-		con.add(new Consumer(name,tel));
+		con.add(new Consumer(name, tel));
 	}
 
 	void nonreserveConfirm() {
@@ -167,8 +167,8 @@ public class MovieReservation {
 	}
 
 	void showSeatStatus() throws ChoiceException {
-		if(showSeat());
-		  return;
+		showSeat();
+		
 	}
 
 	void nonShowSeatStatus() throws ChoiceException {
@@ -177,43 +177,43 @@ public class MovieReservation {
 
 	void movieSeat(int i) {
 		if (movie[i - 1] != null) {
-			for (int time = 0; time < movie[i - 1].length; time++) {
-				for (int col = 0; col < movie[i - 1][time].length; col++) {
-					for (int row = 0; row < movie[i - 1][time][col].length; row++) {
-						movie[i - 1][time][col][row] = ((char) (col + 65)) + "" + (row + 1) + "";
+			for (int time = 0; time < movie[i - 1][0][0].length; time++) {
+				for (int col = 0; col < movie[i - 1].length; col++) {
+					for (int row = 0; row < movie[i - 1][col].length; row++) {
+						movie[i - 1][col][row][time] = ((char) (col + 65)) + "" + (row + 1) + "";
 					}
 				}
 			}
 		}
 	}
 
-	boolean showSeat() throws ChoiceException { // 영화관선택해서 자리 보여주는 메소드
-		if (movieChoice()) {
+	void showSeat() throws ChoiceException { // 영화관선택해서 자리 보여주는 메소드
+		movieChoice(); 
 			if (movie[moviechoice - 1] == null) {
 				System.out.println("개설된 영화가 없습니다.");
-				return false;
+				return;
 			}
 			for (int count = 1; count <= movieTime[moviechoice - 1].length; count++) {
 				System.out.println(count + " :" + movieTime[moviechoice - 1][count - 1]);
 			}
 			System.out.print("시간 선택 : ");
 			movieTimeChoice = Integer.parseInt(sc.nextLine());
-			System.out.println("영화관 제 " + moviechoice + " 관 시간:" + movieTime[moviechoice-1][movieTimeChoice-1]);
+			System.out.println("영화관 제 " + moviechoice + " 관 시간:" + movieTime[moviechoice - 1][movieTimeChoice - 1]);
 
-			for (int i = 0; i < (movie[moviechoice - 1][movieTimeChoice - 1]).length; i++) {
-				for (int j = 0; j < (movie[moviechoice - 1][movieTimeChoice - 1][i]).length; j++) {
-					System.out.print((movie[moviechoice - 1][movieTimeChoice - 1][i][j]) + " ");
+			for (int i = 0; i < (movie[moviechoice - 1]).length; i++) {
+				for (int j = 0; j < (movie[moviechoice - 1][i]).length; j++) {
+					System.out.print((movie[moviechoice - 1][i][j][movieTimeChoice - 1]) + " ");
 				}
 				System.out.println();
 			}
 
-			return true;
-		}
-		return false;
+			return;
+		
+		
 	}
 
 	void seatChoice() throws Exception {
-		if (showSeat()) {
+		showSeat(); 
 			try {
 				while (true) {
 					System.out.print("A1~F6 : ");
@@ -222,7 +222,7 @@ public class MovieReservation {
 					seatnum = getNum(at.charAt(1));
 
 					if (movie[moviechoice - 1] != null) {
-						if ("XX".equals(movie[moviechoice - 1][movieTimeChoice - 1][att][seatnum])) {
+						if ("XX".equals(movie[moviechoice - 1][att][seatnum][movieTimeChoice - 1])) {
 							System.out.print("이미 예매 되어있는자리입니다.\n");
 							System.out.print("다시 선택해주세요.\n");
 							continue;
@@ -237,20 +237,19 @@ public class MovieReservation {
 					throw new ChoiceException();
 				}
 				if (choice == 1) {
-					
-					movie[moviechoice - 1][movieTimeChoice - 1][att][seatnum] = "XX";
+
+					movie[moviechoice - 1][att][seatnum][movieTimeChoice - 1] = "XX";
 					System.out.println("--------예매완료--------");
 					System.out.println("영화관 제 " + moviechoice + "관\n" + "좌석 : " + at + "\n상영시간 : "
 							+ movieTime[moviechoice - 1][movieTimeChoice - 1]);
-					
+
 					if (NewMember.SIGN[0] != null) {
 						mri.add(new MemberReservationInfo(NewMember.SIGN[0], moviechoice, at, getReserNum.GetReserNum(),
 								movieTime[moviechoice - 1][movieTimeChoice - 1], movieTimeChoice));
 					} else {
-						nri.add(new NonReservInfo(name, tel, moviechoice, at, getReserNum.GetReserNum(), movieTime[moviechoice - 1][movieTimeChoice - 1],
-								movieTimeChoice));
+						nri.add(new NonReservInfo(name, tel, moviechoice, at, getReserNum.GetReserNum(),
+								movieTime[moviechoice - 1][movieTimeChoice - 1], movieTimeChoice));
 					}
-					return;
 				} else {
 					return;
 				}
@@ -260,8 +259,7 @@ public class MovieReservation {
 				System.out.println(e.getStackTrace());
 				System.out.println(e.getMessage());
 			}
-		} 
-			return;
+		
 	} // 예약수정완료
 
 	boolean movieChoice() throws ChoiceException {
@@ -362,21 +360,21 @@ public class MovieReservation {
 	}
 
 	void memberSeatCancleSearch(int i) {
-		movie[mri.get(buffer.get(i)).moviechoice - 1][mri.get(buffer.get(i)).movieTimeChoice - 1][numSearch(
-				mri.get(buffer.get(i)).seat.charAt(0))][getNum(
-						mri.get(buffer.get(i)).seat.charAt(1))] = mri.get(buffer.get(i)).seat;
+		movie[mri.get(buffer.get(i)).moviechoice - 1][numSearch(mri.get(buffer.get(i)).seat.charAt(0))][getNum(
+				mri.get(buffer.get(i)).seat.charAt(1))][mri.get(buffer.get(i)).movieTimeChoice
+						- 1] = mri.get(buffer.get(i)).seat;
 	}
 
 	void nonMemberSeatCancleSearch(int i) {
-		movie[nri.get(buffer.get(i)).moviechoice - 1][nri.get(buffer.get(i)).movieTimeChoice - 1][numSearch(
-				nri.get(buffer.get(i)).seat.charAt(0))][getNum(
-						nri.get(buffer.get(i)).seat.charAt(1))] = nri.get(buffer.get(i)).seat;
+		movie[nri.get(buffer.get(i)).moviechoice - 1][numSearch(nri.get(buffer.get(i)).seat.charAt(0))][getNum(
+				nri.get(buffer.get(i)).seat.charAt(1))][nri.get(buffer.get(i)).movieTimeChoice
+						- 1] = nri.get(buffer.get(i)).seat;
 	}
 
 	void MovieCheck() {
 		for (int i = 0; i < movie.length; i++) {
-			if(movie[i]==null) {
-			System.out.println((i + 1) + "에 개설된 영화가 없습니다.");
+			if (movie[i] == null) {
+				System.out.println((i + 1) + "에 개설된 영화가 없습니다.");
 			}
 		}
 	}
@@ -495,6 +493,7 @@ public class MovieReservation {
 			}
 		}
 	}
+
 	void FileSearch() {
 		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\MovieReservation.ser");
 		if (!f.exists()) {

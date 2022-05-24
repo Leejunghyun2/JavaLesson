@@ -79,9 +79,10 @@ public class Admin extends User implements Serializable {
 
 	}
 
+
 	private void MovieSearch(int choice, int num) {
 			try {
-			MovieReservation.movie[choice-1] = new String[num][6][6];
+			MovieReservation.movie[choice-1] = new String[6][6][num];
 			MovieReservation.movieTime[choice-1] = new String[num];
 		for (int i = 0; i < num; i++) {
 			while (true) {
