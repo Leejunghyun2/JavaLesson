@@ -18,7 +18,7 @@ public class ReservationNumber {
 	final String[] COMPARE = new String[1];
 
 	private ReservationNumber() {
-		FileSearch();
+		fileSearch();
 	}
 
 	public static ReservationNumber getInstance() {
@@ -71,7 +71,7 @@ public class ReservationNumber {
 		return false;
 	}
 
-	void ObjOutputData() {
+	void objOutputData() {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 
@@ -99,7 +99,7 @@ public class ReservationNumber {
 	}
 
 	@SuppressWarnings("unchecked")
-	void ObjInputData() {
+	void objInputData() {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
@@ -124,11 +124,11 @@ public class ReservationNumber {
 		}
 	}
 
-	void FileSearch() {
-		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\reserNum.ser");
+	void fileSearch() {
+		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\reserNum.ser");
 		if (!f.exists()) {
 		} else if (f.exists()) {
-			ObjInputData();
+			objInputData();
 			System.out.println("-----파일 불러오기 완료-----");
 		}
 	}

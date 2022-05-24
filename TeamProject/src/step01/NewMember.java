@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class NewMember {
 	private static NewMember member;
 	final static String[] SIGN = new String[1];
-	public static NewMember getinfo() {
+	public static NewMember getInfo() {
 		if (member == null) {
 			member = new NewMember();
 			return member;
@@ -18,7 +18,7 @@ public class NewMember {
 		return member;
 	}
 	private NewMember() {
-		FileSearch();
+		fileSearch();
 	}
 
 	private static ArrayList<User> users;
@@ -38,7 +38,7 @@ public class NewMember {
 
 	void input() {
 		User tmp = loginInfo();
-		if(Search(tmp.getId()) == null){
+		if(search(tmp.getId()) == null){
 			System.out.println("영문자로시작하거나 2글자 이상이어야합니다.");
 			return;
 		}
@@ -53,7 +53,7 @@ public class NewMember {
 
 	}
 
-	void MemberDelete() {
+	void memberDelete() {
 		System.out.print("비밀번호를 입력하세요 ==> ");
 		String pwd = MovieReservation.sc.nextLine().trim();
 		for (int i = 0; i < users.size(); i++) {
@@ -64,7 +64,7 @@ public class NewMember {
 					System.out.print("==> ");
 					int choice = Integer.parseInt(MovieReservation.sc.nextLine());
 					if (choice == 1) {
-						reserInfo.AllCancle();
+						reserInfo.allCancel();
 						users.remove(i);
 						System.out.println("-----탈퇴완료-----");
 						SIGN[0]=null;
@@ -89,7 +89,7 @@ public class NewMember {
 		String id = MovieReservation.sc.nextLine().trim();
 		System.out.print("비밀번호를 입력하세요 ==> ");
 		String pwd = MovieReservation.sc.nextLine().trim();
-		if(Admin.Ad(id, pwd))
+		if(Admin.ad(id, pwd))
 		{
 			System.out.println("-----관리자 로그인-----");
 			SIGN[0] = "관리자";
@@ -131,7 +131,7 @@ public class NewMember {
 
 		return new User(id, pwd, name, phoneNumber);
 	}
-	private String Search(String id) {
+	private String search(String id) {
 		 if(id.length()<2) {
 			 System.out.println("글자수가 적습니다.");
 			 return null;
@@ -144,7 +144,7 @@ public class NewMember {
 		 return id;
 	}
 
-	void ObjOutputData() {
+	void objOutputData() {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 
@@ -172,7 +172,7 @@ public class NewMember {
 	}
 
 	@SuppressWarnings("unchecked")
-	void ObjInputData() {
+	void objInputData() {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
@@ -196,12 +196,12 @@ public class NewMember {
 		}
 	}
 
-	void FileSearch() {
-		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\NewMember.ser");
+	void fileSearch() {
+		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\NewMember.ser");
 		if (!f.exists()) {
 			System.out.println("Start");
 		} else if (f.exists()) {
-			ObjInputData();
+			objInputData();
 			System.out.println("-----파일 불러오기 완료-----");
 		}
 	}

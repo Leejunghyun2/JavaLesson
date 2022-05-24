@@ -14,15 +14,19 @@ public class Test2 {
 				}
 			}
 		}
+		System.out.println(" 忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖");
+		System.out.println(" 弛                 S    C   R   E   E   N                   弛");
+		System.out.println(" 戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎");
 		for (int i = 0; i < (s[0]).length; i++) {
+			System.out.println(" \t忙式式式式忖  忙式式式式忖  忙式式式式忖  忙式式式式忖  忙式式式式忖  忙式式式式忖");
 			for (int j = 0; j < (s[0][i]).length; j++) {
-				System.out.print((s[0][i][j][7]) + " ");
+				System.out.print(("\t弛 "+s[0][i][j][7]) + " 弛 ");
 			}
 			System.out.println();
+			System.out.println(" \t戌式式式式戎  戌式式式式戎  戌式式式式戎  戌式式式式戎  戌式式式式戎  戌式式式式戎");
 		}
 		
-		for(int i=0; i<9;i++) {
-			System.out.println(s[0][0][2][i]);
-		}
+	
+		
 	}
 }

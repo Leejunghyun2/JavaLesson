@@ -1,9 +1,9 @@
 package step01;
 
-public class Test {
-	public static void main(String[] args) {
+public class Test implements ChoiceName {
+	public static void main(String[] args)  {
 		MovieReservation mm = MovieReservation.getinstance();
-		NewMember users = NewMember.getinfo();
+		NewMember users = NewMember.getInfo();
 		ReservationNumber rn = ReservationNumber.getInstance();
 		Admin admin = Admin.getInstance();
 		MenuViewer menu = MenuViewer.getInstance();
@@ -22,32 +22,32 @@ public class Test {
 					MenuViewer.showUserManagement();
 					int choice = Integer.parseInt(MovieReservation.sc.nextLine());
 					switch (choice) {
-					case 1:
+					case MEMBER_LOGIN:
 						users.login(); {
 							System.out.println("로그인하세요.");
 							continue;
 						} // 회원 로그인
 
-					case 2:
+					case JOIN_MEMBER:
 						users.input();
 						continue;
-					case 3:
+					case NON_MEMBER_RESERVATION:
 						mm.nonMemberReser();
 						continue;
-					case 4:
-						mm.nonreserveConfirm();
+					case N_MEMBER_RESERVATION_CHECK:
+						mm.nonReserveConfirm();
 						continue;
-					case 5:
-						mm.reservationCancle();
+					case NON_MEMBER_CANCEL:
+						mm.reservationCancel();
 						continue;
-					case 6:
+					case SEARCH_MY_SEAT:
 						mm.nonShowSeatStatus();
 						continue;
-					case 0:
-						mm.ObjOutputData();
-						users.ObjOutputData();
-						rn.ObjOutputData();
-						menu.ObjOutputData();
+					case QUIT:
+						mm.objOutputData();
+						users.objOutputData();
+						rn.objOutputData();
+						menu.objOutputData();
 						return;
 					}
 				} // 비회원끝
@@ -63,7 +63,7 @@ public class Test {
 					mm.reservationConfirm();
 					break;
 				case 3:
-					mm.reservationCancle();
+					mm.reservationCancel();
 					break;
 				case 4:
 					mm.showSeatStatus();
@@ -72,16 +72,16 @@ public class Test {
 					mm.signOut();
 					break;
 				case 6:
-					users.MemberDelete();
+					users.memberDelete();
 					break;
 				case 7:
 					mm.test();
 					break;
-				case 0:
-					mm.ObjOutputData();
-					users.ObjOutputData();
-					rn.ObjOutputData();
-					menu.ObjOutputData();
+				case QUIT:
+					mm.objOutputData();
+					users.objOutputData();
+					rn.objOutputData();
+					menu.objOutputData();
 					return;
 //---------------------------------------------회원메뉴 끝-----------------------------------------
 				}

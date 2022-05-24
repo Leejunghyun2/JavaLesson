@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Admin extends User implements Serializable {
 	private static Admin s;
 	MovieReservation mm = MovieReservation.getinstance();
-	NewMember nm = NewMember.getinfo();
+	NewMember nm = NewMember.getInfo();
 	ArrayList<User> users = NewMember.userInstance();
 	private static String id = "#admin";
 	private static String pwd = "0462";
@@ -28,7 +28,7 @@ public class Admin extends User implements Serializable {
 		return s;
 	}
 
-	static boolean Ad(String id, String pwd) {
+	static boolean ad(String id, String pwd) {
 		if (id.equals(Admin.id)) {
 			if (pwd.equals(Admin.pwd)) {
 				return true;
@@ -42,65 +42,105 @@ public class Admin extends User implements Serializable {
 			System.out.println(users.get(i));
 		}
 	}
-	private void MovieManagement() throws Exception {
-		MenuViewer.MovieManagement();
-		int choice = Integer.parseInt(MovieReservation.sc.nextLine());
-		switch (choice) {
-		case 1:
-			MovieName();
+	private void movieManagement() {
+		while(true) {
+			try {
+				MenuViewer.movieManagement();
+				int choice = Integer.parseInt(MovieReservation.sc.nextLine());
+				switch (choice) {
+				case 1:
+					movieName();
+					break;
+				case 2:
+					movieCount();
+					break;
+				}
+			}catch (Exception e) {
+				System.out.println("정해진 숫자만 입력하세요!");
+				continue;
+			}
 			break;
-		case 2:
-			MovieCount();
-			break;
-		}
+		}//while
 	}
 	
-	private void MovieCount() throws ChoiceException {
-		try {
-			System.out.println("상영관을 선택해주세요");
-			System.out.printf("1. 1관 2. 2관 3. 3관 \n ==>");
-			int moviechoice = Integer.parseInt(MovieReservation.sc.nextLine());
-			System.out.print("상영할 갯수를 입력하세요 \n ==> ");
-			int number = Integer.parseInt(MovieReservation.sc.nextLine());
-			System.out.printf("%d 개 맞습니까? 1. Yes 2. No \n==> ", number);
-			int choice = Integer.parseInt(MovieReservation.sc.nextLine());
-			if (choice < 1 || choice > 2) {
-				throw new ChoiceException();
-			}
-			if (choice == 1) {
-				MovieSearch(moviechoice, number);
-			} else {
-				System.out.println("----취소----");
-				return;
-			}
-		} catch (NumberFormatException e) {
-			System.out.println("숫자만 입력하세요\n");
-		}
-
+	private void movieCount() throws ChoiceException {
+		while(true) {
+			try {
+				System.out.println("상영관을 선택해주세요");
+				System.out.printf("1. 1관 2. 2관 3. 3관 \n ==>");
+				int moviechoice = Integer.parseInt(MovieReservation.sc.nextLine());
+				System.out.print("상영할 갯수를 입력하세요 \n ==> ");
+				int number = Integer.parseInt(MovieReservation.sc.nextLine());
+				System.out.printf("%d 개 맞습니까? 1. Yes 2. No 3.메인메뉴\n==> ", number);
+				int choice = Integer.parseInt(MovieReservation.sc.nextLine());
+				if (choice < 1 || choice > 2) {
+					throw new ChoiceException();
+				}
+				if (choice == 1) {
+					movieSearch(moviechoice, number);
+				} else if(choice==2){
+					continue;
+				} else {
+					System.out.println("-----취소-----");
+					return;
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("숫자만 입력하세요\n");
+				continue;
+			} //try
+			break;
+		}//while
 	}
 
 
-	private void MovieSearch(int choice, int num) {
+	private void movieSearch(int choice, int num) {
 			try {
 			MovieReservation.movie[choice-1] = new String[6][6][num];
 			MovieReservation.movieTime[choice-1] = new String[num];
 		for (int i = 0; i < num; i++) {
 			while (true) {
-				System.out.printf(choice + "관 %d번째 영화시간을 적어주세요 ed)10시20분 : 1020\n ==> ", i+1);
-				int time = Integer.parseInt(MovieReservation.sc.nextLine());
-				String hour = String.valueOf(time).substring(0, 2);
-				String minute = String.valueOf(time).substring(2, 4);
-				System.out.printf("%s 시 %s 분 맞습니까?1.Yes 2.No\n ==> ", hour, minute);
-				int yn = Integer.parseInt(MovieReservation.sc.nextLine());
-				if (yn < 1 || yn > 2) {
-					System.out.println("잘못입력하셧습니다.다시입력해주세요");
-					continue;
-				}
-				if (yn == 1) {
-						MovieReservation.movieTime[choice-1][i] = hour + "시 " + minute + "분";
-						break;
-				} else {
-					System.out.println("다시 입력해주세요");
+				try {
+					System.out.printf(choice + "관 %d번째 영화시간을 적어주세요 ed)10시20분 : 1020\n ==> ", i+1);
+					String time = MovieReservation.sc.nextLine();
+					String hour = String.valueOf(time).substring(0, 2);
+					String minute = String.valueOf(time).substring(2, 4);
+					System.out.printf("%s 시 %s 분 맞습니까?\n 1.Yes 2.No 3.메인메뉴\n ==> ", hour, minute);
+					if(String.valueOf(time).length()!=4) {
+						System.out.println("4자리만 입력해주세요");
+						continue;
+					}
+					boolean isNumeric=time.matches("[+-]?\\d*(\\.\\d+)?");//문자열이 숫자인지 확인	 false면 리턴(exception에서 처리)
+					int timeRimit=Integer.parseInt(hour);//비교하기위해 int에 담음
+					int minuteRimit=Integer.parseInt(minute);
+					if(0>timeRimit || timeRimit>23) {//시간제한
+						System.out.println("시간은 0~23까지 입력");						
+						if(0>minuteRimit || minuteRimit>59) {//시간맞고 분틀렷을때
+							System.out.println("분은 0~59까지 입력");
+							continue;
+						}
+						continue;
+					}
+					if(0>minuteRimit || minuteRimit>59) {//분 제한
+						System.out.print(",분은 0~59까지 입력");
+						continue;
+					}
+					int yn = Integer.parseInt(MovieReservation.sc.nextLine());
+					if(yn==3) {
+						 return;
+					}
+					if (yn < 1 || yn > 2) {
+						System.out.println("잘못입력하셧습니다.다시입력해주세요");
+						continue;
+					}
+					if (yn == 1) {
+							MovieReservation.movieTime[choice-1][i] = hour + "시 " + minute + "분";
+							break;
+					} else {
+						System.out.println("다시 입력해주세요");
+						continue;
+					}
+				}catch (Exception e) {
+					System.out.println("====정확하게 입력!====");
 					continue;
 				}
 			}
@@ -113,23 +153,27 @@ public class Admin extends User implements Serializable {
 
 	}
 
-	private void MovieName() throws ChoiceException {
-		System.out.println("선택해주세요");
-		System.out.print("1. 1관  2. 2관 3. 3관\n ==> ");
-		try {
-			int choice = Integer.parseInt(MovieReservation.sc.nextLine());
-			if (choice < 0 || choice > 3) {
-				throw new ChoiceException();
+	private void movieName() throws ChoiceException {
+		while(true) {
+			System.out.println("선택해주세요");
+			System.out.print("1. 1관  2. 2관 3. 3관\n ==> ");
+			try {
+				int choice = Integer.parseInt(MovieReservation.sc.nextLine());
+				if (choice < 0 || choice > 3) {
+					throw new ChoiceException();
+				}
+					System.out.print(choice + "관 영화이름을 적어주세요. \n==>");
+					MenuViewer.movieName[choice-1] = MovieReservation.sc.nextLine();
+				
+			} catch (ChoiceException e) {
+				e.showWrongChoice();
+				continue;
+			} catch (NumberFormatException e) {
+				System.out.println("숫자만 입력하세요.\n");
+				continue;
 			}
-				System.out.print(choice + "관 영화이름을 적어주세요. \n==>");
-				MenuViewer.movieName[choice-1] = MovieReservation.sc.nextLine();
-			
-		} catch (ChoiceException e) {
-			e.showWrongChoice();
-		} catch (NumberFormatException e) {
-			System.out.println("숫자만 입력하세요.\n");
-		}
-
+			return;
+		}//while
 	}
 	void adminChoice() {
 		try {
@@ -142,7 +186,7 @@ public class Admin extends User implements Serializable {
 			break;
 		}
 		case 2:{
-			MovieManagement();
+			movieManagement();
 			break;
 		}
 		case 3:{
@@ -165,5 +209,6 @@ public class Admin extends User implements Serializable {
 		}
 		}catch(Exception e) {}
 	}
+
 
 }

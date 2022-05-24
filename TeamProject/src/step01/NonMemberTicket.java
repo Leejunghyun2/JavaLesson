@@ -2,21 +2,21 @@ package step01;
 
 import java.io.Serializable;
 
-public class NonReservInfo extends Consumer implements Serializable{
+public class NonMemberTicket extends Consumer implements Serializable{
 	String seat;
-	int moviechoice,movieTimeChoice;
+	int movieChoice,movieTimeChoice;
 	String reserNum;
 	String movieTime;
-	NonReservInfo(String name,String tel,int moviechoice,String seat,String reserNum,String movieTime,int movieTimeChoice){
+	NonMemberTicket(String name,String tel,int moviechoice,String seat,String reserNum,String movieTime,int movieTimeChoice){
 		super.name = name;
 		super.phoneNumber = tel;
-		this.moviechoice = moviechoice;
+		this.movieChoice = moviechoice;
 		this.seat = seat;
 		this.reserNum = reserNum;
 		this.movieTime = movieTime;
 		this.movieTimeChoice = movieTimeChoice;
 	}
-	NonReservInfo() {
+	NonMemberTicket() {
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -26,13 +26,13 @@ public class NonReservInfo extends Consumer implements Serializable{
 
 	@Override
 	public boolean equals(Object obj) { // 각기 다른곳에 담겨 있는 객체들이라 그 값이 같은지 확인하기위한 오버라이드
-		if (obj instanceof NonReservInfo) {
-			NonReservInfo tmp = (NonReservInfo) obj;
+		if (obj instanceof NonMemberTicket) {
+			NonMemberTicket tmp = (NonMemberTicket) obj;
 			return phoneNumber.equals(tmp.phoneNumber);
 		}
 		return false;
 	}
 	public String toString() {
-		return "영화관 제 " + moviechoice + "관 " + seat + "번 " + "예매번호 : " +reserNum+ "\n"; 
+		return "영화관 제 " + movieChoice + "관 " + seat + "번 " + "예매번호 : " +reserNum+ "\n"; 
 	}
 }

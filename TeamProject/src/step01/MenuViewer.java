@@ -10,14 +10,13 @@ import java.util.ArrayList;
 public class MenuViewer {
 	private static MenuViewer e;
 	private MenuViewer() {
-		FileSearch();
+		fileSearch();
 	}
 	public static MenuViewer getInstance() {
 		if(e == null) {
 			e = new MenuViewer();
 			return e;
 		}return e;
-		
 	}
 	static String movieName[] = new String[3];
     String fileName = "MenuViwer.ser";
@@ -66,11 +65,11 @@ public class MenuViewer {
 		System.out.print("==> ");
 	}
 
-	static void MovieManagement() {
+	static void movieManagement() {
 		System.out.println("1. 상영영화이름");
 		System.out.println("2. 영화시간설정");
 	}
-	void ObjOutputData() {
+	void objOutputData() {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 		try {
@@ -97,7 +96,7 @@ public class MenuViewer {
 	}
 
 	@SuppressWarnings("unchecked")
-	void ObjInputData() {
+	void objInputData() {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
@@ -121,11 +120,11 @@ public class MenuViewer {
 		}
 	}
 
-	void FileSearch() {
-		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\MenuViwer.ser");
+	void fileSearch() {
+		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\MenuViwer.ser");
 		if (!f.exists()) {
 		} else if (f.exists()) {
-			ObjInputData();
+			objInputData();
 		}
 	}
 
