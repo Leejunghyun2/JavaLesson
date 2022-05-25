@@ -3,11 +3,8 @@ package step01;
 import java.io.Serializable;
 
 public class MemberTicket extends Consumer implements Serializable {
-	String id, seat;
+	String id, seat,reservNum,movieTime;
 	int movieChoice,movieTimeChoice;
-	String reservNum;
-	String movieTime;
-	
 	MemberTicket(String id, int moviechoice, String seat,String reserNum,String movieTime,int movieTimeChoice) {
 		this.id = id;
 		this.movieChoice = moviechoice;

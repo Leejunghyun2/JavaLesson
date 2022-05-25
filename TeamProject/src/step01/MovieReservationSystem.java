@@ -13,6 +13,9 @@ public class MovieReservationSystem implements ChoiceName {
 			try {
 				MenuViewer.showUserManagement();
 				int choice = Integer.parseInt(MovieReservation.sc.nextLine());
+				if(choice <0 || choice >6) {
+					throw new ChoiceException();
+				}
 				switch (choice) {
 				case MEMBER_LOGIN:
 					switch (admin.login()) {
@@ -52,9 +55,9 @@ public class MovieReservationSystem implements ChoiceName {
 
 			catch (ChoiceException e) {
 				System.out.println("잘못 입력하셨습니다.");
-			} catch (Exception e) {
-				System.out.println(e.getStackTrace());
-			}
+			} catch (NumberFormatException e) {
+				System.out.println("숫자만 입력해주세요");
+			}catch(Exception e) {}
 
 		}
 	}

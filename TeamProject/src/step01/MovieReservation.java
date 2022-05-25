@@ -258,17 +258,22 @@ public class MovieReservation {
 		}
 	}
 
-	void showSeat() throws ChoiceException { // 영화관선택해서 자리 보여주는 메소드
+	boolean showSeat() throws ChoiceException { // 영화관선택해서 자리 보여주는 메소드
 		movieChoice(); 
 			if (movie[movieChoice - 1] == null) {
 				System.out.println("개설된 영화가 없습니다.");
-				return;
+				return false;
 			}
 			for (int count = 1; count <= movieTime[movieChoice - 1].length; count++) {
 				System.out.println(count + " :" + movieTime[movieChoice - 1][count - 1]);
 			}
 			System.out.print("시간 선택 : ");
 			movieTimeChoice = Integer.parseInt(sc.nextLine());
+			if(movieTimeChoice > movie[movieChoice-1][0][0].length)
+			{
+				System.out.println("선택한 번호는 없는 시간입니다.");
+				return false;
+			}
 			System.out.println(" ┌──────────────────────────────────────────────────────────┐");
 			System.out.println(" │                 S    C   R   E   E   N                   │");
 			System.out.println(" └──────────────────────────────────────────────────────────┘");
@@ -283,7 +288,7 @@ public class MovieReservation {
 				System.out.println(" \t└────┘  └────┘  └────┘  └────┘  └────┘  └────┘");
 			}
 
-			return;
+			return true;
 		
 		
 	}
@@ -291,7 +296,7 @@ public class MovieReservation {
 	void seatChoice() throws Exception {
 		int number;
 		String reserNum;
-		showSeat();
+		if(showSeat()) {
 		while(true) {
 			bufferString.clear();
 				try {
@@ -388,6 +393,7 @@ public class MovieReservation {
 						System.err.println("0~2 숫자를 입력해주세요!!");
 						continue;
 					}
+		}
 		}
 	} // 예약수정완료
 	boolean movieChoice() throws ChoiceException {
@@ -653,7 +659,7 @@ public class MovieReservation {
 	}
 
 	void fileSearch() {
-		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\MovieReservation.ser");
+		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\MovieReservation.ser");
 		if (!f.exists()) {
 		} else if (f.exists()) {
 			objInputData();

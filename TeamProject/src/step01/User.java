@@ -18,7 +18,7 @@ public class User extends Consumer  implements Serializable{
 		this.pwd = pwd;
 	}
 	User(String id, String pwd, String name, String phoneNumber) {
-		super();
+		super(name,phoneNumber);
 		this.id = id;
 		this.pwd = pwd;
 	}

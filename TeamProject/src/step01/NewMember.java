@@ -243,12 +243,10 @@ public class NewMember implements ChoiceName {
 	
 
 	void fileSearch() {
-		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\NewMember.ser");
+		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\NewMember.ser");
 		if (!f.exists()) {
-			System.out.println("Start");
 		} else if (f.exists()) {
 			objInputData();
-			System.out.println("-----파일 불러오기 완료-----");
 		}
 	}
 }

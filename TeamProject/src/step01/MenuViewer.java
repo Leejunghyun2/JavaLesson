@@ -22,10 +22,10 @@ public class MenuViewer {
     String fileName = "MenuViwer.ser";
 	static void showMenu() {
 		System.out.println("┌───────────┐┌───────────┐┌───────────┐");
-		System.out.println("│1. 영화예매　　││2. 예매확인　　││3. 예매취소　　│");
+		System.out.println(" 1. 영화예매    2. 예매확인    3. 예매취소	   ");
 		System.out.println("└───────────┘└───────────┘└───────────┘");
 		System.out.println("┌───────────┐┌───────────┐┌───────────┐");
-		System.out.println("│4. 좌석조회　　││5. 로그아웃　　││6. 회원탈퇴　　│");
+		System.out.println(" 4. 좌석조회    5. 로그아웃    6. 회원탈퇴	   ");
 		System.out.println("└───────────┘└───────────┘└───────────┘");
 		System.out.print(">>> ");
 	}
@@ -48,30 +48,30 @@ public class MenuViewer {
 
 	static void showUserManagement() {
 		System.out.println(" ┌───────────────┐┌───────────────┐┌───────────────┐");
-		System.out.println(" │1. 로그인        ││2. 회원가입 	  ││3. 비회원예매	   │");
+		System.out.println("  1. 로그인          2. 회원가입        3. 비회원예매	    ");
 		System.out.println(" └───────────────┘└───────────────┘└───────────────┘");
 		System.out.println(" ┌───────────────┐┌───────────────┐┌───────────────┐");
-		System.out.println(" │4. 비회원예매확인	 ││5. 비회원예매취소	  ││6. 영화좌석조회    │");
+		System.out.println("  4. 비회원예매확인	   5. 비회원예매취소    6. 영화좌석조회    ");
 		System.out.println(" └───────────────┘└───────────────┘└───────────────┘");
 		System.out.println("                  ┌───────────────┐");
-		System.out.println("                  │0. 취소    	  │");
+		System.out.println("                   0. 취소    	   ");
 		System.out.println("                  └───────────────┘");
 		System.out.print(">>> ");
 	}
 
 	static void showAdminChoice() {
 		System.out.println("┌───────────────┐┌───────────────┐┌───────────────┐");
-		System.out.println("│1. 회원관리     	││2. 영화관리   	 ││ 3. 테스트       │");
+		System.out.println(" 1. 회원관리        2. 영화관리        3. 테스트       ");
 		System.out.println("└───────────────┘└───────────────┘└───────────────┘");
-		System.out.println("┌───────────────┐┌───────────────┐┌───────────────┐");
-		System.out.println("│4. 회원목록     	││5. 로그아웃   	 ││ @. ^오^     	  │");
-		System.out.println("└───────────────┘└───────────────┘└───────────────┘");
+		System.out.println("┌───────────────┐┌───────────────┐");
+		System.out.println(" 4. 회원목록        5. 로그아웃   	  ");
+		System.out.println("└───────────────┘└───────────────┘");
 		System.out.print(">>> ");
 	}
 
 	static void movieManagement() {
 		System.out.println(" ┌──────────────┐┌───────────────┐┌───────────────┐");
-		System.out.println(" │1.상영영화이름	││2. 영화시간설정	 ││ @. ^오^     	  │");
+		System.out.println("  1.상영영화이름	  2. 영화시간설정	    @. ^오^     	   ");
 		System.out.println(" └──────────────┘└───────────────┘└───────────────┘");
 		System.out.print(">>> ");
 	}
@@ -127,7 +127,7 @@ public class MenuViewer {
 	}
 
 	void fileSearch() {
-		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\MenuViwer.ser");
+		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\MenuViwer.ser");
 		if (!f.exists()) {
 		} else if (f.exists()) {
 			objInputData();

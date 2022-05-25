@@ -125,11 +125,10 @@ public class ReservationNumber {
 	}
 
 	void fileSearch() {
-		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\reserNum.ser");
+		File f = new File("C:\\Users\\이정현\\eclipse-workspace\\TeamProject\\reserNum.ser");
 		if (!f.exists()) {
 		} else if (f.exists()) {
 			objInputData();
-			System.out.println("-----파일 불러오기 완료-----");
 		}
 	}
 
