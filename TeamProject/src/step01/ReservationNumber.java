@@ -129,6 +129,7 @@ public class ReservationNumber {
 		if (!f.exists()) {
 		} else if (f.exists()) {
 			objInputData();
+			System.out.println("-----파일 불러오기 완료-----");
 		}
 	}
 

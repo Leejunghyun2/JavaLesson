@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class NewMember {
+public class NewMember implements ChoiceName {
 	private static NewMember member;
 	final static String[] SIGN = new String[1];
 
@@ -38,22 +38,33 @@ public class NewMember {
 	MovieReservation reserInfo = MovieReservation.getinstance();
 
 	void joinMember() {
-		User tmp = joinInfo();
-		if (search(tmp.getId()) == null) {
-			System.out.println("영문자로시작하거나 2글자 이상이어야합니다.");
-			return;
-		}
-		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).getId1(tmp.getId())) {
-				System.out.println("중복된 ID입니다.");
+		try {
+			System.out.println("========================");
+			System.out.println("진행하실려면 1번 메인메뉴는 아무키");
+			System.out.println("========================");
+			System.out.print("회원가입을 진행하시겠습니까? \n==>");
+			int pick=Integer.parseInt(MovieReservation.sc.nextLine());
+			if(pick==1) {
+				User tmp = joinInfo();
+				if (search(tmp.getId()) == null) {
+					System.out.println("영문자로시작하거나 2글자 이상이어야합니다.");
+					return;
+				}
+				for (int i = 0; i < users.size(); i++) {
+					if (users.get(i).getId1(tmp.getId())) {
+						System.out.println("중복된 ID입니다.");
+						return;
+					}
+				}
+				users.add(tmp);
+				System.out.println("---------가입완료----------");
+			}else {
 				return;
 			}
+		}catch (Exception e) {
+			return;
 		}
-		users.add(tmp);
-		System.out.println("---------가입완료----------");
-
 	}
-
 	boolean userLogin(String id, String pwd) {
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getId1(id)) {
@@ -104,16 +115,28 @@ public class NewMember {
 	}
 
 	User joinInfo() {
-		System.out.print("id ==> ");
+		System.out.println("=======================");
+		System.out.println("ID는 영어나 숫자2자리이상 공백X");
+		System.out.println("=======================");
+		System.out.print("ID ==> ");
 		String id = MovieReservation.sc.nextLine();
-		System.out.print("pwd ==> ");
+		System.out.print("PASSWORD ==> ");
 		String pwd = MovieReservation.sc.nextLine();
-		System.out.print("name ==> ");
+		System.out.print("이름 ==> ");
 		String name = MovieReservation.sc.nextLine();
-		System.out.print("phoneNumber ==> ");
+		System.out.print("전화번호 (11자리 -빼고) ==> ");
 		String phoneNumber = MovieReservation.sc.nextLine();
-
+		if(phoneNumber.length() != 11) {
+			System.err.println("휴대폰 번호를 잘못 입력하셨습니다.");
+			return joinInfo();
+		}
+		boolean check;
+		if((check=(id.contains(" ")||pwd.contains(" ")||name.contains(" ")||phoneNumber.contains(" ")))==true) {
+			System.out.println("공백값이 들어있습니다");
+			return joinInfo();
+		}else {
 		return new User(id, pwd, name, phoneNumber);
+		}
 	}
 
 	private String search(String id) {
@@ -133,36 +156,33 @@ public class NewMember {
 		try {
 			MenuViewer.showMenu();
 			int choice = Integer.parseInt(MovieReservation.sc.nextLine());
-			if(choice < 0 || choice >7) {
+			if(choice < QUIT|| choice >7) {
 				throw new ChoiceException();
 			}
 			switch (choice) {
-			case 1:
+			case MEMBER_RESERVATION:
 				mm.seatChoice();
 				break;
-			case 2:
+			case MEMBER_RESERVATION_CHECK:
 				mm.reservationConfirm();
 				break;
-			case 3:
+			case MEMBER_CANCEL:
 				mm.reservationCancel();
 				break;
-			case 4:
+			case SEARCH_SEAT:
 				mm.showSeatStatus();
 				break;
-			case 5:
+			case LOGOUT:
 				if(mm.signOut()) {
 				return;
 				}break;
-			case 6:
+			case DELETE:
 				memberDelete();
 				break;
 			case 7:
 				mm.test();
 				break;
-			case 0:
-				return;
 			}
-			
 		} catch (Exception e) {
 			continue;
 		}
@@ -174,7 +194,6 @@ public class NewMember {
 		ObjectOutputStream out = null;
 
 		try {
-
 			fos = new FileOutputStream(fileName);
 			out = new ObjectOutputStream(fos);
 
@@ -226,8 +245,10 @@ public class NewMember {
 	void fileSearch() {
 		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\NewMember.ser");
 		if (!f.exists()) {
+			System.out.println("Start");
 		} else if (f.exists()) {
 			objInputData();
+			System.out.println("-----파일 불러오기 완료-----");
 		}
 	}
 }

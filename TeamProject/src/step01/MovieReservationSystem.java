@@ -49,11 +49,13 @@ public class MovieReservationSystem implements ChoiceName {
 					return;
 				}
 			} // 비회원끝
+
 			catch (ChoiceException e) {
 				System.out.println("잘못 입력하셨습니다.");
 			} catch (Exception e) {
 				System.out.println(e.getStackTrace());
 			}
+
 		}
 	}
 }

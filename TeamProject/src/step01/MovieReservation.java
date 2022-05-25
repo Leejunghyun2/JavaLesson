@@ -25,15 +25,16 @@ public class MovieReservation {
 		}
 		return s;
 	}
-
+	
 	ArrayList<MemberTicket> memberTicket = new ArrayList<MemberTicket>();
 	ArrayList<NonMemberTicket> nonMemberTicket = new ArrayList<NonMemberTicket>();
 	ArrayList<Integer> buffer = new ArrayList<Integer>();
+	ArrayList<String> bufferString = new ArrayList<String>();
 	ArrayList<Consumer> con = new ArrayList<Consumer>();
 	ArrayList<User> users = NewMember.userInstance();
 	ReservationNumber getReservNum = ReservationNumber.getInstance();
 	int movieChoice = 0, row, seatNum, movieTimeChoice;
-	String name, tel, mySeat;
+	String name, tel, mySeat, reserNum;
 	String fileName = "MovieReservation.ser";
 
 	void test() {
@@ -140,7 +141,6 @@ public class MovieReservation {
 				} catch (Exception e) {
 					System.out.println("잘못 입력하셨습니다.");
 				}return false;
-			
 		}
 	
 
@@ -148,10 +148,7 @@ public class MovieReservation {
 		try {
 			nonMemberInfo();
 			seatChoice();
-		} catch (ChoiceException e) {
-			System.out.println(e.getMessage());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		}catch (Exception e) {
 		}
 	}
 
@@ -160,7 +157,7 @@ public class MovieReservation {
 			try {
 				System.out.print("이름을 입력하세요 ==> ");
 				name = sc.nextLine();
-				System.out.print("핸드폰번호(11자를 입력하세요 ==> ");
+				System.out.print("핸드폰번호(11자)를 입력하세요 ==> ");
 				tel = sc.nextLine();
 				boolean isNumeric=tel.matches("[+-]?\\d*(\\.\\d+)?");
 				if(tel.length()==11){
@@ -178,22 +175,65 @@ public class MovieReservation {
 	}
 
 	void nonReservConfirm() {
-		System.out.print("핸드폰번호를 입력해주세요 ==> ");
-		String phoneNumber = sc.nextLine();
-		for (int i = 0; i < nonMemberTicket.size(); i++) {
-			if (nonMemberTicket.get(i).phoneNumber.equals(phoneNumber)) {
-				System.out.printf("%s님의 예매내역\n", nonMemberTicket.get(i).name);
+		bufferString.clear();
+		System.out.println("1. 휴대폰번호로 조회 / 2. 예매번호로 조회");
+		System.out.print("==> ");
+		int number = Integer.parseInt(sc.nextLine());
+		
+		if(number==1) {
+			while(true) {
+				System.out.print("핸드폰번호를 입력해주세요 ==> ");
+				String phoneNumber = sc.nextLine();
+				if (phoneNumber.length() != 11) {
+					System.err.println("잘못 입력하셨습니다. 다시 입력해주세요");
+					continue;
+				}
+				for (int i = 0; i < nonMemberTicket.size(); i++) {
+					if (nonMemberTicket.get(i).phoneNumber.equals(phoneNumber)) {
+						System.out.printf("%s님의 예매내역\n", nonMemberTicket.get(i).name);
+						System.out.println("예약번호 : "+nonMemberTicket.get(i).reservNum);
+						break;
+					}
+				}
+				for (int i = 0; i < nonMemberTicket.size(); i++) {
+					if (nonMemberTicket.get(i).phoneNumber.equals(phoneNumber)) {
+						System.out.printf("제 %s관 %s번 상영시간 : %s\n", nonMemberTicket.get(i).movieChoice, nonMemberTicket.get(i).seat,
+								nonMemberTicket.get(i).movieTime);
+					} else {
+						System.err.println("예매내역이 없습니다!!");
+					}
+				} 
 				break;
 			}
-		}
-		for (int i = 0; i < nonMemberTicket.size(); i++) {
-			if (nonMemberTicket.get(i).phoneNumber.equals(phoneNumber)) {
-				System.out.printf("제 %s관 %s번\n 상영시간 : %s\n", nonMemberTicket.get(i).movieChoice, nonMemberTicket.get(i).seat,
-						nonMemberTicket.get(i).movieTime);
-			} else {
-				System.out.println("예매된 내역이 없습니다.");
+		} else if(number == 2) {
+			System.out.print("예매번호를 입력해주세요 ==> ");
+			reserNum = sc.nextLine();
+			
+			if (reserNum.length() != 12)
+				System.err.println("잘못 입력하셨습니다. 다시 입력해주세요");
+			
+			if(nonMemberTicket.isEmpty()) {
+				System.err.println("예매 내역이 없습니다.");
 				return;
+			} 
+			for (int i = 0; i < nonMemberTicket.size(); i++) {
+				if (nonMemberTicket.get(i).reservNum.equals(reserNum)) {
+					System.out.printf("%s님의 예매내역\n", nonMemberTicket.get(i).name);
+					System.out.println("예약번호 : "+reserNum);
+					break;
+				}
 			}
+			for (int i = 0; i < nonMemberTicket.size(); i++) {
+				if (nonMemberTicket.get(i).reservNum.equals(reserNum)) {
+					System.out.printf("제 %s관 %s번 상영시간 : %s\n", nonMemberTicket.get(i).movieChoice,
+							nonMemberTicket.get(i).seat, nonMemberTicket.get(i).movieTime);
+				} else {
+					System.err.println("예매내역이 없습니다!!");
+				}
+			}
+		}else {
+			System.err.println("잘못 입력하셨습니다.");
+			return;
 		}
 	}
 
@@ -237,7 +277,7 @@ public class MovieReservation {
 			for (int i = 0; i < (movie[movieChoice - 1]).length; i++) {
 				System.out.println(" \t┌────┐  ┌────┐  ┌────┐  ┌────┐  ┌────┐  ┌────┐");
 				for (int j = 0; j < (movie[movieChoice - 1][i]).length; j++) {
-					System.out.print((movie[movieChoice - 1][i][j][movieTimeChoice - 1]) + " ");
+					System.out.print("	│ "+(movie[movieChoice - 1][i][j][movieTimeChoice - 1]) + " │ ");
 				}
 				System.out.println();
 				System.out.println(" \t└────┘  └────┘  └────┘  └────┘  └────┘  └────┘");
@@ -249,76 +289,125 @@ public class MovieReservation {
 	}
 
 	void seatChoice() throws Exception {
-		showSeat(); 
-			try {
-				while (true) {
-					System.out.print("A1~F6 : ");
-					mySeat = sc.nextLine().toUpperCase().trim();
-					row = numSearch(mySeat.charAt(0));
-					seatNum = getNum(mySeat.charAt(1));
-					if (movie[movieChoice - 1] != null) {
-						if ("XX".equals(movie[movieChoice - 1][row][seatNum][movieTimeChoice - 1])) {
-							System.out.print("이미 예매 되어있는자리입니다.\n");
-							System.out.print("다시 선택해주세요.\n");
-							continue;
-						}
-					}
-					break;
-				}
-				while(true) {
-					try {
-						System.out.println("좌석이 맞습니까? ==> " + mySeat);
-						System.out.println("1.Yes 2.No");
-						int choice = Integer.parseInt(sc.nextLine());
-						if (choice < 1 || choice > 2) {
-							continue;
-						}
-						if (choice == 1) {
-							movie[movieChoice - 1][row][seatNum][movieTimeChoice - 1] = "XX";
-							System.out.println("--------예매완료--------");
-							System.out.println("영화관 제 " + movieChoice + "관\n" + "좌석 : " + mySeat + "\n상영시간 : "
-									+ movieTime[movieChoice - 1][movieTimeChoice - 1]);
-							if (NewMember.SIGN[0] != null) {
-								memberTicket.add(new MemberTicket(NewMember.SIGN[0], movieChoice, mySeat, getReservNum.getReservNum(),
-										movieTime[movieChoice - 1][movieTimeChoice - 1], movieTimeChoice));
-							} else {
-								nonMemberTicket.add(new NonMemberTicket(name, tel, movieChoice, mySeat, getReservNum.getReservNum(),
-										movieTime[movieChoice - 1][movieTimeChoice - 1], movieTimeChoice));
-							}
-						} else {
-							return;
-						}
-					}catch (Exception e) {
-						System.out.println("정해진 숫자만 입력하세요");
+		int number;
+		String reserNum;
+		showSeat();
+		while(true) {
+			bufferString.clear();
+				try {
+					System.out.print("예매 할 인원수를 입력해주세요(1~5) : ");
+					number = Integer.parseInt(sc.nextLine());
+					if(!(number>0 && number<6)) {
+						System.err.println("(1~5)값을 입력해주세요.");
 						continue;
-					}//try
-					break;
-				}//while
-			} catch (Exception e) {
-				System.out.println(e.getStackTrace());
-				System.out.println(e.getMessage());
+					}
+				}catch (Exception e) {
+					System.err.println("(1~5)값을 입력해주세요.");
+					continue;
 			}
-		
-	} // 예약수정완료
-
-	boolean movieChoice() throws ChoiceException {
-		MenuViewer.showMovieMenu();
-		if (movie[0] == null && movie[1] == null && movie[2] == null) {
-			System.out.println("개설된 영화가 없습니다.");
-			return false;
+				System.out.printf("%s명 예매 하시겠습니까?\n 1.Yes 2.No 0.나가기\n", number);
+				System.out.print("==> ");
+				int ch = Integer.parseInt(sc.nextLine());
+				if(ch==1) {
+					try {
+						for(int i=0; i<number; i++) {
+							try {
+								System.out.print("A1~F6 : ");
+								mySeat = sc.nextLine().toUpperCase().trim();
+								row = numSearch(mySeat.charAt(0));
+								seatNum = getNum(mySeat.charAt(1));
+								if (movie[movieChoice - 1] != null) {
+									if ((row < 0 || row > 6) || (seatNum < 0 || seatNum > 6) || mySeat.length() != 2) {
+										System.err.println("잘못 입력하셨습니다 다시 입력해주세요.");
+										i -= 1;
+										continue;
+									} else if ("XX".equals(movie[movieChoice - 1][row][seatNum][movieTimeChoice - 1])) {
+										System.out.print("이미 예매 되어있는자리입니다.\n");
+										System.out.print("다시 선택해주세요.\n");
+										i -= 1;
+										continue;
+									}else if (bufferString.contains(mySeat)){
+										System.err.println("같은 자리는 선택할 수 없습니다.");
+										i -= 1;
+									} else{
+										bufferString.add(mySeat);
+									}
+								}
+							}catch(Exception e) {
+								System.err.println("좌석 열(A~F) / 숫자(1~6) 입력해주세요");
+								i -= 1;
+								continue;
+							}
+						}
+							System.out.println("좌석이 맞습니까? " + bufferString);
+							System.out.println("1.Yes 2.No");
+							System.out.print("==> ");
+							int choice = Integer.parseInt(sc.nextLine());
+							if (choice < 1 || choice > 2) {
+								throw new ChoiceException();
+							}
+							if (choice == 1) {
+								reserNum = getReservNum.getReservNum();
+							for(int i=0; i<number; i++) {
+								row = numSearch(bufferString.get(i).charAt(0));
+								seatNum = getNum(bufferString.get(i).charAt(1));
+								movie[movieChoice - 1][row][seatNum][movieTimeChoice - 1] = "XX";
+								if (NewMember.SIGN[0] != null) {
+									memberTicket.add(new MemberTicket(NewMember.SIGN[0], movieChoice, bufferString.get(i), reserNum,
+											movieTime[movieChoice - 1][movieTimeChoice - 1], movieTimeChoice));
+								} else {
+									nonMemberTicket.add(new NonMemberTicket(name, tel, movieChoice, bufferString.get(i), reserNum,
+											movieTime[movieChoice - 1][movieTimeChoice - 1], movieTimeChoice));
+								}
+							}
+							System.out.println("--------예매완료--------");
+							System.out.println("영화관 제 " + movieChoice + "관\n" + "좌석 : " + bufferString);
+							System.out.println("예매번호 : "+reserNum);
+							System.out.println("----------------------");
+						} else {
+							bufferString.clear();
+							continue;
+						}
+						}catch (ChoiceException e) {
+							e.showWrongChoice();
+							bufferString.clear();
+							continue;
+						} catch(Exception e) {
+							System.err.println("잘못 입력하셨습니다.");
+							bufferString.clear();
+							continue;
+						}
+						break;
+					}else if(ch == 2) {
+						System.out.println("다시 입력해주세요");
+						continue;
+					} else if(ch == 0){
+						System.out.println("메인메뉴로 돌아갑니다.");
+						break;
+					} else {
+						System.err.println("0~2 숫자를 입력해주세요!!");
+						continue;
+					}
 		}
-		movieChoice = Integer.parseInt(sc.nextLine());
-		try {
-			if (movieChoice < 0 || movieChoice > 3) {
-				throw new ChoiceException();
-			} else if (movieChoice == 0) {
-				System.out.println("------예매취소-------");
+	} // 예약수정완료
+	boolean movieChoice() throws ChoiceException {
+			if (movie[0] == null && movie[1] == null && movie[2] == null) {
+				System.out.println("개설된 영화가 없습니다.");
 				return false;
 			}
-		} catch (ChoiceException e) {
-			e.showWrongChoice();
-		}
-		return true;
+			MenuViewer.showMovieMenu();
+			movieChoice = Integer.parseInt(sc.nextLine());
+			try {
+				if (movieChoice < 0 || movieChoice > 3) {
+					throw new ChoiceException();
+				} else if (movieChoice == 0) {
+					System.out.println("------예매취소-------");
+					return false;
+				}
+			} catch (ChoiceException e) {
+				e.showWrongChoice();
+			}
+			return true;
 	}
 
 	int numSearch(char at) {

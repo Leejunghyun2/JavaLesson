@@ -1,5 +1,6 @@
 package step01;
 
+
 public class Screen extends Thread{
 	public void run() {
 		try {
@@ -29,3 +30,4 @@ public class Screen extends Thread{
 		}
 
 }
+

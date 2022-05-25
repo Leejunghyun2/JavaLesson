@@ -70,6 +70,7 @@ public class Admin extends User implements Serializable {
 				int number = Integer.parseInt(MovieReservation.sc.nextLine());
 				System.out.printf("%d 개 맞습니까? 1. Yes 2. No 3.메인메뉴\n==> ", number);
 				int choice = Integer.parseInt(MovieReservation.sc.nextLine());
+				if (choice ==3) { return;}
 				if (choice < 1 || choice > 2) {
 					throw new ChoiceException();
 				}
@@ -101,7 +102,7 @@ public class Admin extends User implements Serializable {
 					String time = MovieReservation.sc.nextLine();
 					String hour = String.valueOf(time).substring(0, 2);
 					String minute = String.valueOf(time).substring(2, 4);
-					System.out.printf("%s 시 %s 분 맞습니까?\n 1.Yes 2.No 3.메인메뉴\n ==> ", hour, minute);
+					
 					if(String.valueOf(time).length()!=4) {
 						System.out.println("4자리만 입력해주세요");
 						continue;
@@ -121,6 +122,7 @@ public class Admin extends User implements Serializable {
 						System.out.print(",분은 0~59까지 입력");
 						continue;
 					}
+					System.out.printf("%s 시 %s 분 맞습니까?\n 1.Yes 2.No 3.메인메뉴\n ==> ", hour, minute);
 					int yn = Integer.parseInt(MovieReservation.sc.nextLine());
 					if(yn==3) {
 						 return;
