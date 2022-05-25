@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class NonMemberTicket extends Consumer implements Serializable{
 	String seat;
 	int movieChoice,movieTimeChoice;
-	String reserNum;
+	String reservNum;
 	String movieTime;
 	NonMemberTicket(String name,String tel,int moviechoice,String seat,String reserNum,String movieTime,int movieTimeChoice){
 		super.name = name;
 		super.phoneNumber = tel;
 		this.movieChoice = moviechoice;
 		this.seat = seat;
-		this.reserNum = reserNum;
+		this.reservNum = reserNum;
 		this.movieTime = movieTime;
 		this.movieTimeChoice = movieTimeChoice;
 	}
@@ -33,6 +33,6 @@ public class NonMemberTicket extends Consumer implements Serializable{
 		return false;
 	}
 	public String toString() {
-		return "영화관 제 " + movieChoice + "관 " + seat + "번 " + "예매번호 : " +reserNum+ "\n"; 
+		return "영화관 제 " + movieChoice + "관 " + seat + "번 " + "예매번호 : " +reservNum+ "\n"; 
 	}
 }

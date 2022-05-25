@@ -8,12 +8,6 @@ public class MemberTicket extends Consumer implements Serializable {
 	String reservNum;
 	String movieTime;
 	
-
-	MemberTicket(String id, int moviechoice, String seat) {
-		this.id = id;
-		this.movieChoice = moviechoice;
-		this.seat = seat;
-	}
 	MemberTicket(String id, int moviechoice, String seat,String reserNum,String movieTime,int movieTimeChoice) {
 		this.id = id;
 		this.movieChoice = moviechoice;
@@ -40,6 +34,7 @@ public class MemberTicket extends Consumer implements Serializable {
 	}
 	
 	public String toString() {
+		
 		return "영화관 제 " + movieChoice + "관 " + seat + "번 \n"
 					+ "예매번호 : " +reservNum + "\n영화시간 : "+movieTime;
 	}

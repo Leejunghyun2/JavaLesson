@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class NewMember {
 	private static NewMember member;
 	final static String[] SIGN = new String[1];
+
 	public static NewMember getInfo() {
 		if (member == null) {
 			member = new NewMember();
@@ -17,11 +18,13 @@ public class NewMember {
 		}
 		return member;
 	}
+
 	private NewMember() {
 		fileSearch();
 	}
 
 	private static ArrayList<User> users;
+	MovieReservation mm = MovieReservation.getinstance();
 
 	public static ArrayList<User> userInstance() {
 		if (users == null) {
@@ -34,11 +37,9 @@ public class NewMember {
 	String fileName = "NewMember.ser";
 	MovieReservation reserInfo = MovieReservation.getinstance();
 
-
-
-	void input() {
-		User tmp = loginInfo();
-		if(search(tmp.getId()) == null){
+	void joinMember() {
+		User tmp = joinInfo();
+		if (search(tmp.getId()) == null) {
 			System.out.println("영문자로시작하거나 2글자 이상이어야합니다.");
 			return;
 		}
@@ -51,6 +52,18 @@ public class NewMember {
 		users.add(tmp);
 		System.out.println("---------가입완료----------");
 
+	}
+
+	boolean userLogin(String id, String pwd) {
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getId1(id)) {
+				if (users.get(i).getPwd1(pwd)) {
+					NewMember.SIGN[0] = id;
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	void memberDelete() {
@@ -67,7 +80,7 @@ public class NewMember {
 						reserInfo.allCancel();
 						users.remove(i);
 						System.out.println("-----탈퇴완료-----");
-						SIGN[0]=null;
+						SIGN[0] = null;
 						return;
 
 					} else {
@@ -82,35 +95,6 @@ public class NewMember {
 		}
 	}
 
-	
-
-	void login() {
-		System.out.print("ID를 입력하세요 ==> ");
-		String id = MovieReservation.sc.nextLine().trim();
-		System.out.print("비밀번호를 입력하세요 ==> ");
-		String pwd = MovieReservation.sc.nextLine().trim();
-		if(Admin.ad(id, pwd))
-		{
-			System.out.println("-----관리자 로그인-----");
-			SIGN[0] = "관리자";
-			return;
-		}
-		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).getId1(id)) {
-				if (users.get(i).getPwd1(pwd)) {
-					System.out.println("---로그인 완료---");
-					SIGN[0] = id;
-					return;
-				}
-			}
-			
-		}
-		System.out.println("----잘못 입력 하셨습니다.----");
-		SIGN[0] = null;
-		return;
-	}
-	
-
 	public boolean searchList() {
 		if (users.isEmpty()) {
 			return true;
@@ -119,7 +103,7 @@ public class NewMember {
 		}
 	}
 
-	User loginInfo() {
+	User joinInfo() {
 		System.out.print("id ==> ");
 		String id = MovieReservation.sc.nextLine();
 		System.out.print("pwd ==> ");
@@ -131,17 +115,58 @@ public class NewMember {
 
 		return new User(id, pwd, name, phoneNumber);
 	}
+
 	private String search(String id) {
-		 if(id.length()<2) {
-			 System.out.println("글자수가 적습니다.");
-			 return null;
-		 }else if(!(id.charAt(0) >='A' && id.charAt(0) <= 'Z')) {
-			 if(!(id.charAt(0) >= 'a' && id.charAt(0) <= 'z')){
-				 return null;
-			 }
-		 }
-		 
-		 return id;
+		if (id.length() < 2) {
+			System.out.println("글자수가 적습니다.");
+			return null;
+		} else if (!(id.charAt(0) >= 'A' && id.charAt(0) <= 'Z')) {
+			if (!(id.charAt(0) >= 'a' && id.charAt(0) <= 'z')) {
+				return null;
+			}
+		}
+
+		return id;
+	}
+	void userMenu() throws Exception {
+		while (true) {
+		try {
+			MenuViewer.showMenu();
+			int choice = Integer.parseInt(MovieReservation.sc.nextLine());
+			if(choice < 0 || choice >7) {
+				throw new ChoiceException();
+			}
+			switch (choice) {
+			case 1:
+				mm.seatChoice();
+				break;
+			case 2:
+				mm.reservationConfirm();
+				break;
+			case 3:
+				mm.reservationCancel();
+				break;
+			case 4:
+				mm.showSeatStatus();
+				break;
+			case 5:
+				if(mm.signOut()) {
+				return;
+				}break;
+			case 6:
+				memberDelete();
+				break;
+			case 7:
+				mm.test();
+				break;
+			case 0:
+				return;
+			}
+			
+		} catch (Exception e) {
+			continue;
+		}
+		}
 	}
 
 	void objOutputData() {
@@ -196,13 +221,13 @@ public class NewMember {
 		}
 	}
 
+	
+
 	void fileSearch() {
 		File f = new File("C:\\Users\\WU\\eclipse-workspace\\TeamProject\\NewMember.ser");
 		if (!f.exists()) {
-			System.out.println("Start");
 		} else if (f.exists()) {
 			objInputData();
-			System.out.println("-----파일 불러오기 완료-----");
 		}
 	}
 }

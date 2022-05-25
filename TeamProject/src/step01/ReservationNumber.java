@@ -29,44 +29,44 @@ public class ReservationNumber {
 		return num;
 	}
 
-	String GetReserNum() {
+	String getReservNum() {
 		if (COMPARE[0] != null) {
-			if (!COMPARE[0].equals(Today())) {
+			if (!COMPARE[0].equals(today())) {
 				count = 0;
 			}
 		}
-		COMPARE[0] = Today();
+		COMPARE[0] = today();
 		count++;
-		return ReserNum(count);
+		return reservNum(count);
 	}
 
-	private String Today() {
+	private String today() {
 		return format.format(date);
 	}
 
-	private String ReserNum(int count) {
+	private String reservNum(int count) {
 
 		if (count > 999) {
-			return Today() + String.valueOf(count);
+			return today() + String.valueOf(count);
 		} else if (count > 99) {
-			return Today() + "0" + String.valueOf(count);
+			return today() + "0" + String.valueOf(count);
 		} else if (count > 9) {
-			return Today() + "00" + String.valueOf(count);
+			return today() + "00" + String.valueOf(count);
 		} else {
-			return Today() + "000" + String.valueOf(count);
+			return today() + "000" + String.valueOf(count);
 		}
 	}
 
 	@Override
 	public int hashCode() {
-		return ReserNum(count).hashCode(); // 주소의 해쉬코드도 비교해야해서 오버라이드
+		return reservNum(count).hashCode(); // 주소의 해쉬코드도 비교해야해서 오버라이드
 	}
 
 	@Override
 	public boolean equals(Object obj) { // 각기 다른곳에 담겨 있는 객체들이라 그 값이 같은지 확인하기위한 오버라이드
 		if (obj instanceof User) {
 			ReservationNumber tmp = (ReservationNumber) obj;
-			return ReserNum(count).equals(tmp.ReserNum(count));
+			return reservNum(count).equals(tmp.reservNum(count));
 		}
 		return false;
 	}
@@ -129,7 +129,6 @@ public class ReservationNumber {
 		if (!f.exists()) {
 		} else if (f.exists()) {
 			objInputData();
-			System.out.println("-----파일 불러오기 완료-----");
 		}
 	}
 

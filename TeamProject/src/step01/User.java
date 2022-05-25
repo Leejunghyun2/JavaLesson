@@ -2,7 +2,7 @@ package step01;
 
 import java.io.Serializable;
 
-public class User extends Consumer implements Serializable{
+public class User extends Consumer  implements Serializable{
 	private String id;
 	private String pwd;
 	protected String getId() {
@@ -18,7 +18,7 @@ public class User extends Consumer implements Serializable{
 		this.pwd = pwd;
 	}
 	User(String id, String pwd, String name, String phoneNumber) {
-		super(name, phoneNumber);
+		super();
 		this.id = id;
 		this.pwd = pwd;
 	}
@@ -51,5 +51,5 @@ public class User extends Consumer implements Serializable{
 		}
 		return false;
 	}
-
+	
 }

@@ -1,23 +1,20 @@
 package step01;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Admin extends User implements Serializable {
 	private static Admin s;
 	MovieReservation mm = MovieReservation.getinstance();
 	NewMember nm = NewMember.getInfo();
 	ArrayList<User> users = NewMember.userInstance();
-	private static String id = "#admin";
-	private static String pwd = "0462";
-
-	private Admin() {
-
+    private HashMap admin = new HashMap();
+    private boolean access = false;
+    private String id,pwd;
+    
+    private Admin() {
+    		admin.put("#admin", "0462" );
 	}
 
 	public static Admin getInstance() {
@@ -28,9 +25,9 @@ public class Admin extends User implements Serializable {
 		return s;
 	}
 
-	static boolean ad(String id, String pwd) {
-		if (id.equals(Admin.id)) {
-			if (pwd.equals(Admin.pwd)) {
+	private boolean ad(String id, String pwd) {
+		if (admin.containsKey(id)) {
+			if (admin.get(id).equals(pwd)) {
 				return true;
 			}
 		}
@@ -175,9 +172,36 @@ public class Admin extends User implements Serializable {
 			return;
 		}//while
 	}
+	int login() {
+		System.out.print("ID를 입력하세요 ==> ");
+		id = MovieReservation.sc.nextLine().trim();
+		System.out.print("비밀번호를 입력하세요 ==> ");
+		pwd = MovieReservation.sc.nextLine().trim();
+		return check();
+	}
+	
+	private int check() {
+		if(ad(id,pwd))
+		{
+			System.out.println("-----관리자 로그인-----");
+			access = true;
+			return 3;
+		}else if(nm.userLogin(id,pwd)) {
+			System.out.println("----로그인 완료----");
+			NewMember.SIGN[0]=id;
+					return 2;
+		}else {
+			return 1;
+		}
+	}
 	void adminChoice() {
+		while(true) {
 		try {
-		mm.MovieCheck();
+		if(!access) {
+			System.out.println("잘못된 접근방식입니다.");
+			return;
+		}
+		mm.movieCheck();
 		MenuViewer.showAdminChoice();
 		int choice = Integer.parseInt(MovieReservation.sc.nextLine());
 		switch(choice) {
@@ -202,13 +226,15 @@ public class Admin extends User implements Serializable {
 				break;
 			}
 		case 5:{
-			mm.signOut();
+			if(mm.signOut()) {
+			access = false;
 			return;
+			}
+			break;
 		}
 		
 		}
 		}catch(Exception e) {}
 	}
-
-
+	}
 }

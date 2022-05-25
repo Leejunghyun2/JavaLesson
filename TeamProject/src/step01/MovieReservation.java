@@ -31,9 +31,9 @@ public class MovieReservation {
 	ArrayList<Integer> buffer = new ArrayList<Integer>();
 	ArrayList<Consumer> con = new ArrayList<Consumer>();
 	ArrayList<User> users = NewMember.userInstance();
-	ReservationNumber getReserNum = ReservationNumber.getInstance();
-	int movieChoice = 0, att, seatNum, movieTimeChoice;
-	String name, tel, at;
+	ReservationNumber getReservNum = ReservationNumber.getInstance();
+	int movieChoice = 0, row, seatNum, movieTimeChoice;
+	String name, tel, mySeat;
 	String fileName = "MovieReservation.ser";
 
 	void test() {
@@ -122,8 +122,7 @@ public class MovieReservation {
 		}
 	}
 
-	void signOut() throws ChoiceException {
-		while(true) {
+	boolean signOut() throws ChoiceException {
 			System.out.print("로그아웃 하시겠습니까? 1.YES 2.NO \n==>");
 				try {
 		
@@ -134,17 +133,18 @@ public class MovieReservation {
 					if (choice == 1) {
 						NewMember.SIGN[0] = null;
 						System.out.println("----로그아웃 완료----");
+						return true;
 					}
 				} catch (ChoiceException e) {
 					e.showWrongChoice();
 				} catch (Exception e) {
 					System.out.println("잘못 입력하셨습니다.");
-				}
-			break;
-		}//while
-	}
+				}return false;
+			
+		}
+	
 
-	void nonMemberReser() throws ChoiceException {
+	void nonMemberReserv() throws ChoiceException {
 		try {
 			nonMemberInfo();
 			seatChoice();
@@ -177,7 +177,7 @@ public class MovieReservation {
 		}
 	}
 
-	void nonReserveConfirm() {
+	void nonReservConfirm() {
 		System.out.print("핸드폰번호를 입력해주세요 ==> ");
 		String phoneNumber = sc.nextLine();
 		for (int i = 0; i < nonMemberTicket.size(); i++) {
@@ -253,11 +253,11 @@ public class MovieReservation {
 			try {
 				while (true) {
 					System.out.print("A1~F6 : ");
-					at = sc.nextLine().toUpperCase().trim();
-					att = numSearch(at.charAt(0));
-					seatNum = getNum(at.charAt(1));
+					mySeat = sc.nextLine().toUpperCase().trim();
+					row = numSearch(mySeat.charAt(0));
+					seatNum = getNum(mySeat.charAt(1));
 					if (movie[movieChoice - 1] != null) {
-						if ("XX".equals(movie[movieChoice - 1][att][seatNum][movieTimeChoice - 1])) {
+						if ("XX".equals(movie[movieChoice - 1][row][seatNum][movieTimeChoice - 1])) {
 							System.out.print("이미 예매 되어있는자리입니다.\n");
 							System.out.print("다시 선택해주세요.\n");
 							continue;
@@ -267,22 +267,22 @@ public class MovieReservation {
 				}
 				while(true) {
 					try {
-						System.out.println("좌석이 맞습니까? ==> " + at);
+						System.out.println("좌석이 맞습니까? ==> " + mySeat);
 						System.out.println("1.Yes 2.No");
 						int choice = Integer.parseInt(sc.nextLine());
 						if (choice < 1 || choice > 2) {
 							continue;
 						}
 						if (choice == 1) {
-							movie[movieChoice - 1][att][seatNum][movieTimeChoice - 1] = "XX";
+							movie[movieChoice - 1][row][seatNum][movieTimeChoice - 1] = "XX";
 							System.out.println("--------예매완료--------");
-							System.out.println("영화관 제 " + movieChoice + "관\n" + "좌석 : " + at + "\n상영시간 : "
+							System.out.println("영화관 제 " + movieChoice + "관\n" + "좌석 : " + mySeat + "\n상영시간 : "
 									+ movieTime[movieChoice - 1][movieTimeChoice - 1]);
 							if (NewMember.SIGN[0] != null) {
-								memberTicket.add(new MemberTicket(NewMember.SIGN[0], movieChoice, at, getReserNum.GetReserNum(),
+								memberTicket.add(new MemberTicket(NewMember.SIGN[0], movieChoice, mySeat, getReservNum.getReservNum(),
 										movieTime[movieChoice - 1][movieTimeChoice - 1], movieTimeChoice));
 							} else {
-								nonMemberTicket.add(new NonMemberTicket(name, tel, movieChoice, at, getReserNum.GetReserNum(),
+								nonMemberTicket.add(new NonMemberTicket(name, tel, movieChoice, mySeat, getReservNum.getReservNum(),
 										movieTime[movieChoice - 1][movieTimeChoice - 1], movieTimeChoice));
 							}
 						} else {
@@ -425,7 +425,7 @@ public class MovieReservation {
 						- 1] = nonMemberTicket.get(buffer.get(i)).seat;
 	}
 
-	void MovieCheck() {
+	void movieCheck() {
 		for (int i = 0; i < movie.length; i++) {
 			if (movie[i] == null) {
 				System.out.println((i + 1) + "에 개설된 영화가 없습니다.");
