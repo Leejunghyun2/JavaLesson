@@ -44,20 +44,25 @@ public class MovieReservation {
 	}
 
 	void reservationConfirm() {
+		int a = -1; 
+		bufferString.clear();
 		if (NewMember.SIGN[0] != null) {
 			for (int i = 0; i < memberTicket.size(); i++) {
 				if (memberTicket.get(i).id.equals(NewMember.SIGN[0])) {
-					System.out.printf("%s님의 예매내역\n", memberTicket.get(i).id);
-					break;
-				} else {
-					System.out.println("예매내역이 없습니다.");
+					bufferString.add(memberTicket.get(i).seat);
+					a = i;
 				}
 			}
-			for (int i = 0; i < memberTicket.size(); i++) {
-				if (memberTicket.get(i).id.equals(NewMember.SIGN[0])) {
-					System.out.println(memberTicket.get(i));
-				}
+			if(a==-1) {
+				System.out.println("예매 내역이 없습니다.");
+				return;
 			}
+			System.out.println("--------예매완료--------");
+			System.out.println(NewMember.SIGN[0]+"님의 예매내역");
+			System.out.println("영화관 제 " + memberTicket.get(a).movieChoice + "관\n" + "좌석 : " + bufferString);
+			System.out.println("예매번호 : "+memberTicket.get(a).reservNum);
+			System.out.println("영화제목 :" + MenuViewer.movieName[memberTicket.get(a).movieChoice-1]);
+			System.out.println("----------------------");
 		}
 	}
 
@@ -69,10 +74,10 @@ public class MovieReservation {
 					count += 1;
 					buffer.add(i);
 					System.out.println(count + " : " + memberTicket.get(i));
-				} else {
-					System.out.println("예매내역이 없습니다.");
-					return;
 				} 
+			}if(count == 0) {
+				System.out.println("예매내역이 없습니다.");
+				return;
 			}
 			while(true) {
 				try {
@@ -122,7 +127,6 @@ public class MovieReservation {
 			break;
 		}
 	}
-
 	boolean signOut() throws ChoiceException {
 			System.out.print("로그아웃 하시겠습니까? 1.YES 2.NO \n==>");
 				try {
